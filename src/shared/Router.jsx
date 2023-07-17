@@ -1,18 +1,25 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from '../pages/Homepage';
+import Layout from '../common/Layout';
+import Homepage from '../pages/Homepage';
 import Bird from '../pages/Bird';
 import Cat from '../pages/Cat';
 import Dog from '../pages/Dog';
+import SignIn from '../components/auth/SignIn';
+import SignUp from '../components/auth/SignUp';
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/bird" element={<Bird />} />
-        <Route path="/dog" element={<Dog />} />
-        <Route path="/cat" element={<Cat />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/bird" element={<Bird />} />
+          <Route path="/dog" element={<Dog />} />
+          <Route path="/cat" element={<Cat />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
