@@ -1,7 +1,12 @@
 import React from 'react';
+import Main from '../components/main/Main';
 
 function Homepage() {
-  return <div>어떤 동물을 닮았을까요?</div>;
+  return (
+    <div>
+      <Main />
+    </div>
+  );
 }
 
 export default Homepage;
