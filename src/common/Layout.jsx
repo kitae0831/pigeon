@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import '../color.css'
 
 function Layout() {
   return (
@@ -46,8 +47,9 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 24px;
-  background-color: #000000;
+  background-color: var(--color_pink);
   color: white;
+  font-weight: bold;
 `;
 
 const Footer = styled.footer`
@@ -55,7 +57,7 @@ const Footer = styled.footer`
   display: flex;
   justify-content: space-between;
   padding: 24px;
-  background-color: #eeeeee;
+  background-color: var(--color_light_pink);
   color: black;
   position: absolute;
   bottom: 0;
