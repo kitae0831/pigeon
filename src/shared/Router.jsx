@@ -7,6 +7,7 @@ import Cat from '../pages/Cat';
 import Dog from '../pages/Dog';
 import SignIn from '../components/auth/SignIn';
 import SignUp from '../components/auth/SignUp';
+import Animal from '../pages/Animal';
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Homepage />} />
+          <Route path="/animal" element={<Animal />} />
           <Route path="/bird" element={<Bird />} />
           <Route path="/dog" element={<Dog />} />
           <Route path="/cat" element={<Cat />} />
