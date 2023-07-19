@@ -8,6 +8,8 @@ import Dog from '../pages/Dog';
 import SignIn from '../components/auth/SignIn';
 import SignUp from '../components/auth/SignUp';
 import Animal from '../pages/Animal';
+import Image from '../pages/Image';
+import ImageResult from '../pages/ImageResult';
 
 const Router = () => {
   return (
@@ -19,6 +21,8 @@ const Router = () => {
           <Route path="/bird" element={<Bird />} />
           <Route path="/dog" element={<Dog />} />
           <Route path="/cat" element={<Cat />} />
+          <Route path="/image-test" element={<Image />} />
+          <Route path="/image-result" element={<ImageResult />} />
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/signUp" element={<SignUp />} />
         </Route>
