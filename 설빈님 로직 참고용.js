@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getAnimalTest } from '../../api/animalTest';
 import { styled } from 'styled-components';
+
 function AnimalTest() {
   const { isLoading, isError, data } = useQuery('animalTest', getAnimalTest);
   const [selectedAnswer, setSelectedAnswer] = useState([]);
+
   if (isLoading) {
     return <div>로딩중입니다.</div>;
   }
   if (isError) {
     return <div>오류입니다.</div>;
   }
+
   const handleRadioChange = (questionId, value) => {
     setSelectedAnswer((prevValues) => {
       const newValues = [...prevValues];
@@ -19,6 +22,7 @@ function AnimalTest() {
     });
   };
   console.log(selectedAnswer);
+
   return (
     <div>
       {data.map((q) => {

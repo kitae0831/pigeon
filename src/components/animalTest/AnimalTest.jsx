@@ -2,10 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getAnimalTest } from '../../api/animalTest';
 import { styled } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 function AnimalTest() {
   const { isLoading, isError, data } = useQuery('animalTest', getAnimalTest);
   const [state, setState] = useState([{}]);
+  const navigate = useNavigate();
+
+  const resultHandelr = () => {
+    const answerA = state.filter((i) => i.selectedAnswer === 'A').length;
+    const answerB = state.filter((i) => i.selectedAnswer === 'B').length;
+    const answerC = state.filter((i) => i.selectedAnswer === 'C').length;
+
+    if (answerA >= answerB && answerA >= answerC) {
+      navigate('/bird');
+    } else if (answerB >= answerC && answerB > answerA) {
+      navigate('/dog');
+    } else if (answerC > answerA && answerC > answerB) {
+      navigate('/cat');
+    }
+  };
 
   if (isLoading) {
     return <div>로딩중입니다.</div>;
@@ -155,10 +171,12 @@ function AnimalTest() {
         );
       })}
 
-      <button type="button" onClick={() => console.log(state)}>
+      <button type="button" onClick={resultHandelr}>
         Click
       </button>
     </div>
+
+    // state이 데이터를 가지고 조건을 돌려서 짜란 보여주면댐 () {> 새} {> 강아지}
   );
 }
 
