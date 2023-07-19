@@ -24,7 +24,7 @@ const Pink = styled.button`
     background-color: var(--color_light_pink);
     transition: all 0.3s;
   }
-`
+`;
 
 const Purple = styled.button`
   align-items: center;
@@ -40,7 +40,7 @@ const Purple = styled.button`
 
   &:hover {
     background-color: var(--color_gray);
-    color: var(--color_purple)
+    color: var(--color_purple);
     transition: all 0.3s;
   }
-`
+`;
