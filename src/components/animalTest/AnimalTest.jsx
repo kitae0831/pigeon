@@ -15,11 +15,11 @@ function AnimalTest() {
     const answerC = state.filter((i) => i.selectedAnswer === 'C').length;
 
     if (answerA >= answerB && answerA >= answerC) {
-      navigate('/bird');
+      navigate('/search?type=bird');
     } else if (answerB >= answerC && answerB > answerA) {
-      navigate('/dog');
+      navigate('/search?type=dog');
     } else if (answerC > answerA && answerC > answerB) {
-      navigate('/cat');
+      navigate('/search?type=cat');
     }
   };
 
