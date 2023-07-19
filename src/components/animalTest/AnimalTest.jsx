@@ -41,7 +41,6 @@ function AnimalTest() {
 
   return (
     <div>
-      {/* 사용하지 않아야할 때 = todolist 마냥 여러 리스트가 삭제되고 항목들이 변돌 될 때는 index를 사용하면 안된다.. 사용해도 될 때 = 수정 삭제 없이 고정되어 있는 애들일 때는 사용해도 된다*/}
       {data.map((q, index) => {
         return (
           <div key={q.id}>
