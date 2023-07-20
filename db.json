@@ -359,6 +359,12 @@
     }
   ],
   "imageScore": {
-    "score": 43
-  }
+    "score": 36
+  },
+  "FreeBoard": [
+    {
+      "id": 1,
+      "description": "안녕하세요"
+    }
+  ]
 }
