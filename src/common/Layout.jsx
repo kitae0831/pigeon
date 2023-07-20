@@ -9,29 +9,24 @@ function Layout() {
     <Container>
       <Header>
         <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
-          Personality Type test
+        오구오구
         </Link>
-        <Link to="/freeBoard" style={{ textDecoration: 'none', color: 'white' }}>
-          게시판
-        </Link>
-
         <div
           style={{
             display: 'flex',
             gap: '12px'
           }}
         >
-          <Link to="/signin" style={{ textDecoration: 'none', color: 'white' }}>
-            로그인
-          </Link>
-          <Link to="/signup" style={{ textDecoration: 'none', color: 'white' }}>
-            회원가입
-          </Link>
         </div>
       </Header>
       <Outlet />
       <Footer>
         <div>React 아웃소싱 프로젝트</div>
+        <a
+        href="https://www.flaticon.com/kr/free-icons/"
+        title="오리너구리 아이콘"
+        style={{textDecoration: "none", color: "black"}}
+        >오리너구리 아이콘  제작자: Flat Icons - Flaticon</a>
         <div>B반 9조 비둘기</div>
       </Footer>
     </Container>
@@ -50,7 +45,9 @@ const Container = styled.div`
 const Header = styled.header`
   display: flex;
   justify-content: space-between;
-  padding: 24px;
+  padding: 20px;
+  align-items: center;
+  height: 10px;
   background-color: var(--color_pink);
   color: white;
   font-weight: bold;
