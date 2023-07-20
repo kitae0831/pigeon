@@ -12,8 +12,13 @@ function Main() {
       <MbtiTest />
       <h1>어떤 동물을 닮았을까?</h1>
       <PurpleButton onClick={() => navigate('/animal')}>테스트 시작</PurpleButton>
+
+      <h1>남들이 생각하는 당신은?</h1>
+      <PurpleButton onClick={() => navigate('/image-test')}>테스트 시작</PurpleButton>
+
       <h1>출근길에서 살아남기 테스트</h1>
       <PurpleButton onClick={() => navigate('/workSurvive')}>테스트 시작</PurpleButton>
+
     </>
   );
 }

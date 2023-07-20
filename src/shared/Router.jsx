@@ -6,6 +6,9 @@ import Homepage from '../pages/Homepage';
 import SignIn from '../components/auth/SignIn';
 import SignUp from '../components/auth/SignUp';
 import Animal from '../pages/Animal';
+import Image from '../pages/Image';
+import ImageResult from '../pages/ImageResult';
+
 import WorkSurvive from '../pages/WorkSurvive';
 import FreeBoard from '../pages/FreeBoard';
 
@@ -20,6 +23,8 @@ const Router = () => {
         <Route element={<Layout />}>
           <Route path="/" element={<Homepage />} />
           <Route path="/animal" element={<Animal />} />
+          <Route path="/image-test" element={<Image />} />
+          <Route path="/image-result" element={<ImageResult />} />
           <Route path="/search" element={<Bird />} />
           <Route path="/search?type=cat" element={<Cat />} />
           <Route path="/search?type=dog" element={<Dog />} />
