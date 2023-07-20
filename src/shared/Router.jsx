@@ -6,6 +6,8 @@ import Homepage from '../pages/Homepage';
 import SignIn from '../components/auth/SignIn';
 import SignUp from '../components/auth/SignUp';
 import Animal from '../pages/Animal';
+import Vacation from '../pages/Vacation';
+import VacationResult from '../pages/VacationResult';
 import Image from '../pages/Image';
 import ImageResult from '../pages/ImageResult';
 
@@ -32,6 +34,8 @@ const Router = () => {
           <Route path="/freeBoard" element={<FreeBoard />} />
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/signUp" element={<SignUp />} />
+          <Route path="/Vacation" element={<Vacation />} />
+          <Route path="/VacationResult" element={<VacationResult />} />
         </Route>
       </Routes>
     </BrowserRouter>
