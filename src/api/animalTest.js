@@ -7,16 +7,4 @@ const getAnimalTest = async () => {
   return response.data;
 };
 
-const addAnimalTest = async (newTest) => {
-  await axios.post(`${URL}/animalTest`, newTest);
-};
-
-const delAnimalTest = async (id) => {
-  await axios.delete(`${URL}/animalTest/${id}`);
-};
-
-const fixAnimalTest = async (newTest) => {
-  await axios.patch(`${URL}/animalTest/${newTest.id}`, { ...newTest });
-};
-
-export { getAnimalTest, addAnimalTest, delAnimalTest, fixAnimalTest };
+export { getAnimalTest };

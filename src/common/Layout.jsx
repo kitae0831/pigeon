@@ -2,15 +2,19 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import '../color.css'
+import '../color.css';
 
 function Layout() {
   return (
     <Container>
       <Header>
         <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
-          Animal Test
+          Personality Type test
         </Link>
+        <Link to="/freeBoard" style={{ textDecoration: 'none', color: 'white' }}>
+          게시판
+        </Link>
+
         <div
           style={{
             display: 'flex',
