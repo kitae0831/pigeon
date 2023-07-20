@@ -70,5 +70,16 @@
       "answerB": "친절하고 다정하다고 합니다.",
       "answerC": "현실적이고 신중하다고 합니다."
     }
+  ],
+  "FreeBoard": [
+    {
+      "title": "",
+      "description": "ㄴㅇㅁㄹ",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "description": "ㅁㄴㄹㅇㄴㅇㅁ"
+    }
   ]
 }

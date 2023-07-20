@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 function AnimalTest() {
   const { isLoading, isError, data } = useQuery('animalTest', getAnimalTest);
-  const [state, setState] = useState([{}]);
+  const [state, setState] = useState([]);
   const navigate = useNavigate();
 
   const resultHandelr = () => {
@@ -14,12 +14,16 @@ function AnimalTest() {
     const answerB = state.filter((i) => i.selectedAnswer === 'B').length;
     const answerC = state.filter((i) => i.selectedAnswer === 'C').length;
 
-    if (answerA >= answerB && answerA >= answerC) {
-      navigate('/search?type=bird');
-    } else if (answerB >= answerC && answerB > answerA) {
-      navigate('/search?type=dog');
-    } else if (answerC > answerA && answerC > answerB) {
-      navigate('/search?type=cat');
+    if (answerA + answerB + answerC === 10) {
+      if (answerA >= answerB && answerA >= answerC) {
+        navigate('/search?type=bird');
+      } else if (answerB >= answerC && answerB > answerA) {
+        navigate('/search?type=dog');
+      } else if (answerC > answerA && answerC > answerB) {
+        navigate('/search?type=cat');
+      }
+    } else {
+      alert('모든 항목에 답변해주세요');
     }
   };
 
