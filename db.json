@@ -408,8 +408,25 @@
   "FreeBoard": [
     {
       "title": "",
-      "description": "앙",
-      "id": 1
+      "description": "ㅁㄴㅇㄹ",
+      "id": 2
+    },
+    {
+      "title": "",
+      "description": "sdafasdf",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "description": ""
+    },
+    {
+      "id": 5,
+      "description": ""
+    },
+    {
+      "id": 6,
+      "description": "asdfasdf"
     }
   ]
 }
