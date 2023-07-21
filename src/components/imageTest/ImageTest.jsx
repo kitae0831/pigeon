@@ -5,6 +5,8 @@ import { useState } from 'react';
 import $ from 'jquery';
 import { PurpleButton } from '../../shared/Buttons';
 import { useNavigate } from 'react-router-dom';
+import { styled } from 'styled-components';
+import '../../color.css'
 
 function ImageTest() {
   const { isLoading, isError, data} = useQuery('imageTest', getImageTest);
@@ -39,29 +41,66 @@ function ImageTest() {
   }
 
   return (
-    <>
-      <h3>{data[questionNumber].question}</h3>
-      <div>
+  <StContainer>
+    <h1 style={{color: "var(--color_purple"}}>이미지 테스트 😎</h1>
+    <QuestionBox>
+      <h2>{questionNumber+1}.&nbsp;{data[questionNumber].question}</h2>
+      <AnswerBox>
         {data[questionNumber].answers.map((a) => {
           return (
-          <div key={a.id}>
+          <div
+          key={a.id}
+          >
           <input
             type="radio"
             id={a.id}
             value={a.score}
             name={questionNumber}
+            style={{cursor: "pointer"}}
           />
-          <label>{a.answer}</label>
-          </div>
+          <label htmlFor={a.id} style={{fontWeight: "bold", cursor: "pointer"}}>{a.answer}</label>
+           </div>
           )
         })}
-      </div>
+        </AnswerBox>
        <PurpleButton
        onClick={nextButtonClickHandler}
-       >{questionNumber===9? "결과 보기": "다음"}
+       style={{width: "140px", height: "50px", borderRadius: "20px",}}
+       >{questionNumber===9? "결과 확인하기 !": "다음"}
       </PurpleButton>
-    </>
+      </QuestionBox>
+    </StContainer>
   )
 }
 
 export default ImageTest
+
+const StContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+const QuestionBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 20px;
+  background-color:var(--color_purple);
+  background-color: rgba( 255, 255, 255, 0.5 );
+  border: 7px solid var(--color_purple);
+  border-radius: 20px;
+  width: 850px;
+`
+const AnswerBox = styled.div`
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  width: 400px;
+  height: 220px;
+  padding-left: 30px;
+  box-sizing: border-box;
+`
