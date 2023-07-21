@@ -68,8 +68,8 @@ export default VacationResult;
 const ResultContainer = styled.div`
   display: flex;
   justify-content: center;
-  background-color: #f2f2f2;
   padding: 20px;
+  text-align: center;
 `;
 
 const VacationImgWrapper = styled.div`

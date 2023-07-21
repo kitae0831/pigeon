@@ -1,6 +1,6 @@
 import React from 'react'
 import { getImageResult, getImageScore } from '../../api/imageTest';
-import { PurpleButton } from '../../shared/Buttons';
+import { GreenButton } from '../../shared/Buttons';
 import { useQuery } from 'react-query';
 import { styled } from 'styled-components';
 import '../../color.css';
@@ -33,24 +33,24 @@ function ImageResult() {
     <h3>남들이 생각하는 당신은?</h3>
     <h2 style={{
       marginBottom: "35px",
-      // color: "var(--color_purple)",
       fontWeight:"bold",
-      textShadow: "1px 1px 2px var(--color_purple)",
-      textDecoration: "underline var(--color_purple) 3px",
+      fontSize: "40px",
+      textShadow: "1px 1px 2px var(--color_dark_green)",
+      textDecoration: "underline var(--color_green) 3px",
     }}>{matchedResult.title}</h2>
     </div>
     <ResultImg src={imgMapper[matchedResult.id]}/>
     <StContent>{matchedResult.content}</StContent>
-    <div>
-    <PurpleButton
+    <ButtonSet>
+    <GreenButton
        onClick={() => {navigate('/')}}
        >홈으로
-      </PurpleButton>
-      <PurpleButton
+      </GreenButton>
+      <GreenButton
        onClick={() => {navigate('/image-test')}}
        >다시하기
-      </PurpleButton>
-    </div>
+      </GreenButton>
+    </ButtonSet>
     </ResultBox>
   )
 }
@@ -75,4 +75,10 @@ const StContent = styled.div`
   font-weight: bold;
   line-height: 2;
   margin-bottom: 30px;
+`
+const ButtonSet = styled.div`
+height: 30px;
+  display: flex;
+  gap: 10px;
+
 `

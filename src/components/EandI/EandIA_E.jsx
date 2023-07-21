@@ -2,14 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ETypeImage from '../../assets/E형.png';
 import { styled } from 'styled-components';
-import { PurpleButton } from '../../shared/Buttons';
+import { GreenButton } from '../../shared/Buttons';
 
 function EandIA_E({ onClose }) {
   const navigate = useNavigate();
-
+  
   const handleGoBack = () => {
     onClose();
-    navigate.push('/'); // 메인 페이지로 이동
+    navigate('/');
   };
 
   return (
@@ -25,8 +25,8 @@ function EandIA_E({ onClose }) {
           <div>매력적인 성격으로 주변 사람들과 쉽게 친구가 될 수 있으며, 새로운 사람들과의 인연을 즐깁니다.</div>{' '}
           긍정적인 에너지를 뿜어내어 주변을 밝게 만들어주는 장점이 있습니다.
         </p>
-        <PurpleButton onClick={onClose}>닫기</PurpleButton>
-        <PurpleButton onClick={handleGoBack}>메인 페이지로</PurpleButton>
+        <GreenButton onClick={onClose}>다시하기</GreenButton>
+        <GreenButton onClick={handleGoBack}>메인 페이지로</GreenButton>
       </ModalContent>
     </ModalOverlay>
   );

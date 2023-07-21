@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PurpleButton } from '../../shared/Buttons';
+import { GreenButton } from '../../shared/Buttons';
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -35,7 +35,7 @@ const TestModal = ({ onClose }) => {
     <ModalOverlay>
       <ModalContent>
         <ModalText>선택지를 하나 이상 선택해주세요.</ModalText>
-        <PurpleButton onClick={onClose}>알겠습니다.</PurpleButton>
+        <GreenButton onClick={onClose}>알겠습니다.</GreenButton>
       </ModalContent>
     </ModalOverlay>
   );

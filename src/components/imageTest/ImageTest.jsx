@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { getImageTest, fixScore } from '../../api/imageTest';
 import { useState } from 'react';
 import $ from 'jquery';
-import { PurpleButton } from '../../shared/Buttons';
+import { GreenButton } from '../../shared/Buttons';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import '../../color.css';
@@ -42,9 +42,9 @@ function ImageTest() {
 
   return (
     <StContainer>
-      <h1 style={{ color: 'var(--color_purple' }}>이미지 테스트 😎</h1>
+      <h1 style={{ color: 'var(--color_dark_green', fontSize: "40px"}}>이미지 테스트 😎</h1>
       <QuestionBox>
-        <h2>
+        <h2 style={{fontSize: "30px"}}>
           {questionNumber + 1}.&nbsp;{data[questionNumber].question}
         </h2>
         <AnswerBox>
@@ -59,9 +59,9 @@ function ImageTest() {
             );
           })}
         </AnswerBox>
-        <PurpleButton onClick={nextButtonClickHandler} style={{ width: '140px', height: '50px', borderRadius: '20px' }}>
+        <GreenButton onClick={nextButtonClickHandler} style={{width:'200px'}}>
           {questionNumber === 9 ? '결과 확인하기 !' : '다음'}
-        </PurpleButton>
+        </GreenButton>
       </QuestionBox>
     </StContainer>
   );
@@ -78,13 +78,12 @@ const StContainer = styled.div`
 
 const QuestionBox = styled.div`
   display: flex;
+  height: 550px;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
   padding: 20px;
-  background-color: var(--color_purple);
-  background-color: rgba(255, 255, 255, 0.5);
-  border: 7px solid var(--color_purple);
+  border: 7px solid var(--color_green);
   border-radius: 20px;
   width: 850px;
 `;
@@ -93,8 +92,9 @@ const AnswerBox = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 10px;
-  width: 400px;
-  height: 220px;
-  padding-left: 30px;
+  width: 500px;
+  height: 300px;
+  padding-left: 50px;
   box-sizing: border-box;
+
 `;

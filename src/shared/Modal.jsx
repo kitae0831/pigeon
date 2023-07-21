@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import { PurpleButton } from '../shared/Buttons';
+import { GreenButton } from '../shared/Buttons';
 
 function Modal(props) {
   const { name, handleOkBtn, handleCancelBtn, handleDelBtn, children } = props;
@@ -11,8 +11,8 @@ function Modal(props) {
         <StModalContents>
           <h3>{children}</h3>
           <ButtonContainer>
-            <PurpleButton onClick={name == 'delBtn' ? handleDelBtn : handleOkBtn}>확인</PurpleButton>
-            <PurpleButton onClick={handleCancelBtn}>취소</PurpleButton>
+            <GreenButton onClick={name == 'delBtn' ? handleDelBtn : handleOkBtn}>확인</GreenButton>
+            <GreenButton onClick={handleCancelBtn}>취소</GreenButton>
           </ButtonContainer>
         </StModalContents>
       </StModalBox>
@@ -38,7 +38,7 @@ const StModalContents = styled.div`
   background-color: #fff;
   padding: 20px;
   width: 30%;
-  height: 25%;
+  height: 30%;
   border-radius: 12px;
   text-align: center;
   justify-items: center;
@@ -51,6 +51,8 @@ const StModalContents = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
+  height: 10%;
   width: 100%;
-  margin-top: 20px;
+  margin: 20px;
+  gap: 10px;
 `;

@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
-import { useQuery } from 'react-query';
-import { slidesData } from '../main/SlidesData';
 import styled from 'styled-components';
 import LeftBtn from '../../assets/leftArrow.png';
 import RightBtn from '../../assets/rightArrow.png';
+import { GreenButton } from '../../shared/Buttons';
 import { useNavigate } from 'react-router';
-import dollTree from '../../assets/testImg/dollTree.jpg';
-import greenTree1 from '../../assets/testImg/greenTree1.jpg';
-import greenTree2 from '../../assets/testImg/greenTree2.jpg';
-import greenTree3 from '../../assets/testImg/greenTree3.jpg';
-import lemonTree1 from '../../assets/testImg/lemonTree.jpg';
 import { SlidesData } from '../main/SlidesData';
 
 function Main() {
@@ -29,8 +23,7 @@ function Main() {
     3: SlidesData[3].img,
     4: SlidesData[4].img
   };
-  console.log(step);
-  console.log('이미지', mainImgMapper[step.toString()]);
+  
 
   const handleTestBtnClick = (step) => {
     switch (step) {
@@ -64,39 +57,25 @@ function Main() {
       setStep(step + 1);
     }
   };
+  console.log(mainImgMapper[step.toString()])
 
   return (
     <>
-      <div
-        style={{
-          // border: '3px solid black',
-          // backgroundColor: 'black',
-          width: '100%',
-          height: '100%',
-          position: 'absolute',
-          top: '0',
-          // bottom: '0',
-          // left: '0',
-          minHeight: '100vh',
-
-          zIndex: '-1',
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundImage: `url("${mainImgMapper[step.toString()]}")`
-        }}
-      ></div>
       <MainBox>
         {/* <ImgBox src={slidesData[step].img} /> */}
         <ContentBox>
           <TestBox>
-            <h3>{SlidesData[step]?.title}</h3>
+            <TextBox>
+            <h1 style={{fontSize: "40px"}}>{SlidesData[step]?.title}</h1>
             <p>{SlidesData[step]?.content}</p>
-            <TestButton onClick={() => handleTestBtnClick(step)}>테스트하기</TestButton>
+            </TextBox>
+            <GreenButton onClick={() => handleTestBtnClick(step)}>테스트하기</GreenButton>
           </TestBox>
         </ContentBox>
         <LeftImg src={LeftBtn} onClick={handlePrevBtnClick} />
         <RightImg src={RightBtn} onClick={handleNextBtnClick} />
       </MainBox>
+      <BackgroundImg imgRef= {mainImgMapper[step.toString()]}></BackgroundImg>
     </>
   );
 }
@@ -108,6 +87,8 @@ const MainBox = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+   
+ 
   // flex-direction: column;
   // align-items: center;
 
@@ -116,28 +97,34 @@ const MainBox = styled.div`
   background-size: cover; */
 `;
 
-// const ImgBox = styled.img`
-//   width: 100%;
-//   height: 800px;
-//   position: absolute;
-
-//   top: 0;
-//   left: 0;
-
-//   z-index: -1;
-// `;
-
-const TestBox = styled.div`
-  position: fixed;
-  bottom: 20%;
-  right: 8rem;
-  max-width: 420px;
-  text-align: center;
+const BackgroundImg = styled.div`
+        background-image: url(${(props) => (props.imgRef)});
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        min-height: 100vh;
+        z-index: -1;
+        background-position: center;
+        background-size: cover;
 `;
 
+const TestBox = styled.div`
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const TextBox = styled.div`
+  height: 200px;
+  text-align: center;
+  padding: 50px 100px 0px 100px;
+  margin:150px 0 60px 0;
+  white-space: pre-line;
+`
+
 const ContentBox = styled.div`
-  display: grid;
-  align-items: bottom;
+  width: 100%;
 `;
 
 // const ButtonSet = styled.div`
@@ -178,29 +165,29 @@ const RightImg = styled.img`
   cursor: pointer;
 `;
 
-const TestButton = styled.button`
-  position: relative;
-  display: block;
-  float: left;
-  width: 130px;
-  height: 60px;
-  padding: 0;
-  margin: 10px 20px 10px 0;
-  font-weight: 600;
-  // text-align: center;
-  align-items: center;
-  line-height: 40px;
-  color: #fff;
-  border: 2px solid #007144;
-  border-radius: 20px;
-  transition: all 0.2s;
-  background: #00ae68;
-  box-shadow: 0px 6px 0px 0px #007144;
+// const BtnBox = styled.div`
+//   display: flex;
+//   align-items: center;
+//   justify-content: center
+// `
 
-  &:hover {
-    cursor: pointer;
-    margin-top: 15px;
-    margin-bottom: 6px;
-    box-shadow: 0px 0px 0px 0px #007144;
-  }
-`;
+// const TestButton = styled.button`
+//   width: 130px;
+//   height: 60px;
+//   padding: 10px;
+//   font-weight: 600;
+//   line-height: 40px;
+//   color: #fff;
+//   border: 2px solid #007144;
+//   border-radius: 20px;
+//   transition: all 0.2s;
+//   background: #00ae68;
+//   box-shadow: 0px 6px 0px 0px #007144;
+
+//   &:hover {
+//     cursor: pointer;
+//     margin-top: 15px;
+//     margin-bottom: 6px;
+//     box-shadow: 0px 0px 0px 0px #007144;
+//   }
+// `;

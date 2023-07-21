@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getFreeBoard, addFreeBoard, delFreeBoard, fixFreeBoard } from '../../api/freeBoard';
 import styled from 'styled-components';
-import { PinkButton, PurpleButton } from '../../shared/Buttons';
+import { PinkButton, GreenButton } from '../../shared/Buttons';
 import writeIcon from '../../assets/writeIcon.png';
 const FreeBoardWrite = () => {
   const [FreeBoard, setFreeBoard] = useState([]);
   const [newTest, setNewTest] = useState({ title: '', description: '' });
+
   const fetchFreeBoard = async () => {
     try {
       const data = await getFreeBoard();
@@ -14,6 +15,7 @@ const FreeBoardWrite = () => {
       console.error('Error fetching tests:', error);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -24,6 +26,7 @@ const FreeBoardWrite = () => {
       console.error('Error adding test:', error);
     }
   };
+
   const handleDelete = async (id) => {
     try {
       await delFreeBoard(id);
@@ -32,18 +35,21 @@ const FreeBoardWrite = () => {
       console.error('Error deleting test:', error);
     }
   };
-  const handleUpdate = async (updatedTest) => {
+
+  const handleUpdate = async (test) => {
     try {
-      setNewTest(updatedTest);
-      await fixFreeBoard(updatedTest);
+      setNewTest(test);
+      await fixFreeBoard(newTest.description);
       fetchFreeBoard();
     } catch (error) {
       console.error('Error updating test:', error);
     }
   };
+
   useEffect(() => {
     fetchFreeBoard();
   }, []);
+
   return (
     <div>
       <Title>자유게시판</Title>
@@ -51,10 +57,10 @@ const FreeBoardWrite = () => {
         <CommentInput
           type="text"
           value={newTest.description}
-          onChange={(e) => setNewTest({ ...newTest, description: e.target.value })}
+          onChange={(e) => setNewTest({description: e.target.value })}
           placeholder="Description"
         />
-        <WriteIcon src={writeIcon} />
+        <WriteIcon src={writeIcon} onClick={handleSubmit}/>
       </Form>
       {FreeBoard.map((test) => (
         <CommentListBox key={test.id}>
@@ -102,7 +108,7 @@ const WriteIcon = styled.img`
   transform: translateY(-50%);
   &:hover {
     cursor: pointer;
-    transform: scale(1.2);
+    width: 40px
   }
 `;
 const CommentListBox = styled.div`

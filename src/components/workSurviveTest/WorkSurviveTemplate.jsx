@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { WorkSurviveTest, WorkSurviveResult } from './WorkSurviveData';
 import { styled } from 'styled-components';
 import Modal from '../../shared/Modal';
-import { PurpleButton } from '../../shared/Buttons';
+import { GreenButton } from '../../shared/Buttons';
 import workResult from '../../assets/workResult.png';
 
 function WorkSurviveTemplate() {
@@ -97,10 +97,10 @@ function WorkSurviveTemplate() {
             );
           })}
           <ButtonBox>
-            {step == 0 ? null : <PurpleButton onClick={() => setStep(step - 1)}>이전</PurpleButton>}
-            <PurpleButton name="nextBtn" onClick={handleNextBtn}>
+            {step == 0 ? null : <GreenButton onClick={() => setStep(step - 1)}>이전</GreenButton>}
+            <GreenButton name="nextBtn" onClick={handleNextBtn}>
               {step == 9 ? '결과보기' : '다음'}
-            </PurpleButton>
+            </GreenButton>
           </ButtonBox>
         </div>
       </QuestionBox>
@@ -159,7 +159,6 @@ const ResultContainer = styled.div`
   text-align: center;
   width: 900px;
   height: 600px;
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -180,10 +179,14 @@ const ResultImg = styled.img`
 `;
 
 const ResultDescription = styled.p`
-  width: 600px;
+  width: 1000px;
   line-height: 1.5;
+  white-space: pre-line;
 `;
 
 const ButtonBox = styled.div`
-  margin-top: 30px;
+  margin-top: 90px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 `;

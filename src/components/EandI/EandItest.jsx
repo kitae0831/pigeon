@@ -4,7 +4,7 @@ import Modal from './TestModal';
 import EandIA_E from './EandIA_E'; // 외향적 결과 컴포넌트
 import EandIA_I from './EandIA_I'; // 내향적 결과 컴포넌트';
 import styled from 'styled-components';
-import { PurpleButton } from '../../shared/Buttons';
+import { GreenButton } from '../../shared/Buttons';
 import nightSky from '../../assets/night_sky.png'; // 별이 떠있는 밤하늘 이미지
 
 const EandItset = () => {
@@ -95,8 +95,8 @@ const EandItset = () => {
             ))}
           </Choices>
           <ButtonsContainer>
-            {currentQuestionIndex > 0 && <PurpleButton onClick={handlePrevClick}>이전</PurpleButton>}
-            <PurpleButton onClick={handleNextClick}>다음</PurpleButton>
+            {currentQuestionIndex > 0 && <GreenButton onClick={handlePrevClick}>이전</GreenButton>}
+            <GreenButton onClick={handleNextClick}>다음</GreenButton>
           </ButtonsContainer>
         </QuestionContainer>
       )}
@@ -111,7 +111,10 @@ const EandItset = () => {
 export default EandItset;
 
 const Container = styled.div`
+  margin-top: 150px;
+  margin-bottom: 150px;
   background-color: #121721; /* 밤하늘 색상 */
+  height: 400px;
   color: #fff;
   padding: 20px;
 `;
@@ -137,9 +140,11 @@ const Choice = styled.li`
 `;
 
 const ButtonsContainer = styled.div`
+height: 50px;
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  padding-bottom: 40px;
 `;
 
 const ResultContainer = styled.div`
