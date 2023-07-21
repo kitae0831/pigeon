@@ -22,7 +22,7 @@ function Main() {
         <TestImg src={workImg} onClick={() => navigate('/workSurvive')} />
         <TestImg src={imageImage} onClick={() => navigate('/image-test')} />
         <TestImg src={VacationImg} onClick={() => navigate('/Vacation')} />
-        <TestImg src={EandI} onClick={() => navigate('/Vacation')} />
+        <TestImg src={EandI} onClick={() => navigate('/Personality')} />
       </TestBox>
     </>
   );
