@@ -16,11 +16,11 @@ function AnimalTest() {
 
     if (answerA + answerB + answerC === 10) {
       if (answerA >= answerB && answerA >= answerC) {
-        navigate('/search?type=bird');
+        navigate('/search/bird');
       } else if (answerB >= answerC && answerB > answerA) {
-        navigate('/search?type=dog');
+        navigate('/search/dog');
       } else if (answerC > answerA && answerC > answerB) {
-        navigate('/search?type=cat');
+        navigate('/search/cat');
       }
     } else {
       alert('모든 항목에 답변해주세요');
@@ -47,155 +47,197 @@ function AnimalTest() {
     <div>
       {data.map((q, index) => {
         return (
-          <div key={q.id}>
-            <h3>{q.question}</h3>
+          <MainBox key={q.id}>
+            <QuestionBox>
+              {q.id}. {q.question}
+            </QuestionBox>
+            <AnswerBox>
+              <AnswerBoxA>
+                <input
+                  type="radio"
+                  name={`question${index}`}
+                  id="A"
+                  value="A"
+                  onChange={(e) => {
+                    // 선택한 문항이 이미 있는지 확인
+                    const checkProlbemIsAlreadyExistIndex = state.findIndex((item) => item.problem === index + 1);
 
-            <label>
-              <input
-                type="radio"
-                name={`question${index}`}
-                id="A"
-                value="A"
-                onChange={(e) => {
-                  // 선택한 문항이 이미 있는지 확인
-                  const checkProlbemIsAlreadyExistIndex = state.findIndex((item) => item.problem === index + 1);
+                    if (checkProlbemIsAlreadyExistIndex > -1) {
+                      // 객체의 얕은 복사
+                      const tempItem = {
+                        ...state[checkProlbemIsAlreadyExistIndex]
+                      };
 
-                  if (checkProlbemIsAlreadyExistIndex > -1) {
-                    // 객체의 얕은 복사
-                    const tempItem = {
-                      ...state[checkProlbemIsAlreadyExistIndex]
-                    };
+                      tempItem.selectedAnswer = e.target.value;
 
-                    tempItem.selectedAnswer = e.target.value;
+                      setState((prev) => {
+                        // 얕은 복사
+                        const current = [...prev];
+                        current[checkProlbemIsAlreadyExistIndex] = tempItem;
 
-                    setState((prev) => {
-                      // 얕은 복사
-                      const current = [...prev];
-                      current[checkProlbemIsAlreadyExistIndex] = tempItem;
+                        return current;
+                      });
+                    }
 
-                      return current;
-                    });
-                  }
+                    if (checkProlbemIsAlreadyExistIndex === -1) {
+                      setState((prev) => [
+                        ...prev,
+                        {
+                          problem: index + 1,
+                          selectedAnswer: e.target.value
+                        }
+                      ]);
+                    }
+                  }}
+                />
+                {q.answerA}
+              </AnswerBoxA>
 
-                  if (checkProlbemIsAlreadyExistIndex === -1) {
-                    setState((prev) => [
-                      ...prev,
-                      {
-                        problem: index + 1,
-                        selectedAnswer: e.target.value
-                      }
-                    ]);
-                  }
-                }}
-              />
-              {q.answerA}
-            </label>
+              <AnswerBoxB>
+                <input
+                  type="radio"
+                  name={`question${index}`}
+                  id="B"
+                  value="B"
+                  onChange={(e) => {
+                    // 선택한 문항이 이미 있는지 확인
+                    const checkProlbemIsAlreadyExistIndex = state.findIndex((item) => item.problem === index + 1);
 
-            <label>
-              <input
-                type="radio"
-                name={`question${index}`}
-                id="B"
-                value="B"
-                onChange={(e) => {
-                  // 선택한 문항이 이미 있는지 확인
-                  const checkProlbemIsAlreadyExistIndex = state.findIndex((item) => item.problem === index + 1);
+                    if (checkProlbemIsAlreadyExistIndex > -1) {
+                      // 객체의 얕은 복사
+                      const tempItem = {
+                        ...state[checkProlbemIsAlreadyExistIndex]
+                      };
 
-                  if (checkProlbemIsAlreadyExistIndex > -1) {
-                    // 객체의 얕은 복사
-                    const tempItem = {
-                      ...state[checkProlbemIsAlreadyExistIndex]
-                    };
+                      tempItem.selectedAnswer = e.target.value;
 
-                    tempItem.selectedAnswer = e.target.value;
+                      setState((prev) => {
+                        // 얕은 복사
+                        const current = [...prev];
+                        current[checkProlbemIsAlreadyExistIndex] = tempItem;
 
-                    setState((prev) => {
-                      // 얕은 복사
-                      const current = [...prev];
-                      current[checkProlbemIsAlreadyExistIndex] = tempItem;
+                        return current;
+                      });
+                    }
 
-                      return current;
-                    });
-                  }
+                    if (checkProlbemIsAlreadyExistIndex === -1) {
+                      setState((prev) => [
+                        ...prev,
+                        {
+                          problem: index + 1,
+                          selectedAnswer: e.target.value
+                        }
+                      ]);
+                    }
+                  }}
+                />
+                {q.answerB}
+              </AnswerBoxB>
 
-                  if (checkProlbemIsAlreadyExistIndex === -1) {
-                    setState((prev) => [
-                      ...prev,
-                      {
-                        problem: index + 1,
-                        selectedAnswer: e.target.value
-                      }
-                    ]);
-                  }
-                }}
-              />
-              {q.answerB}
-            </label>
+              <AnswerBoxC>
+                <input
+                  type="radio"
+                  name={`question${index}`}
+                  id="C"
+                  value="C"
+                  onChange={(e) => {
+                    // 선택한 문항이 이미 있는지 확인
+                    const checkProlbemIsAlreadyExistIndex = state.findIndex((item) => item.problem === index + 1);
 
-            <label>
-              <input
-                type="radio"
-                name={`question${index}`}
-                id="C"
-                value="C"
-                onChange={(e) => {
-                  // 선택한 문항이 이미 있는지 확인
-                  const checkProlbemIsAlreadyExistIndex = state.findIndex((item) => item.problem === index + 1);
+                    if (checkProlbemIsAlreadyExistIndex > -1) {
+                      // 객체의 얕은 복사
+                      const tempItem = {
+                        ...state[checkProlbemIsAlreadyExistIndex]
+                      };
 
-                  if (checkProlbemIsAlreadyExistIndex > -1) {
-                    // 객체의 얕은 복사
-                    const tempItem = {
-                      ...state[checkProlbemIsAlreadyExistIndex]
-                    };
+                      tempItem.selectedAnswer = e.target.value;
 
-                    tempItem.selectedAnswer = e.target.value;
+                      setState((prev) => {
+                        // 얕은 복사
+                        const current = [...prev];
+                        current[checkProlbemIsAlreadyExistIndex] = tempItem;
 
-                    setState((prev) => {
-                      // 얕은 복사
-                      const current = [...prev];
-                      current[checkProlbemIsAlreadyExistIndex] = tempItem;
+                        return current;
+                      });
+                    }
 
-                      return current;
-                    });
-                  }
-
-                  if (checkProlbemIsAlreadyExistIndex === -1) {
-                    setState((prev) => [
-                      ...prev,
-                      {
-                        problem: index + 1,
-                        selectedAnswer: e.target.value
-                      }
-                    ]);
-                  }
-                }}
-              />
-              {q.answerC}
-            </label>
-          </div>
+                    if (checkProlbemIsAlreadyExistIndex === -1) {
+                      setState((prev) => [
+                        ...prev,
+                        {
+                          problem: index + 1,
+                          selectedAnswer: e.target.value
+                        }
+                      ]);
+                    }
+                  }}
+                />
+                {q.answerC}
+              </AnswerBoxC>
+            </AnswerBox>
+          </MainBox>
         );
       })}
-
-      <button type="button" onClick={resultHandelr}>
+      <PurpleButton type="button" onClick={resultHandelr}>
         Click
-      </button>
+      </PurpleButton>
     </div>
   );
 }
 
 export default AnimalTest;
 
-const Answer = styled.p`
-  border: 1px solid;
-  width: 300px;
-  height: 30px;
-  &:hover {
-    cursor: pointer;
-    box-shadow: rgba(120, 120, 120, 0.2) 0px 2px 8px 0px;
-  }
+const MainBox = styled.div`
+  box-shadow: 10px 2px 10px 0px #8785a2;
+
+  padding: 10px;
+  margin: 20px;
 `;
 
-const RadioContainer = styled.div`
+const QuestionBox = styled.h2`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+`;
+
+const AnswerBox = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const AnswerBoxA = styled.label`
+  margin-right: 30px;
+  display: inline-block;
+`;
+
+const AnswerBoxB = styled.label`
+  margin-right: 30px;
+  margin-bottom: 15px;
+  display: inline-block;
+`;
+
+const AnswerBoxC = styled.label`
+  display: inline-block;
+`;
+
+const PurpleButton = styled.button`
+  display: flex;
+  margin-right: auto;
+
+  box-sizing: border-box;
+
+  margin: 5px;
+  padding: 10px 15px;
+  background-color: var(--color_purple);
+  color: var(--color_gray);
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color_gray);
+    color: var(--color_purple);
+    transition: all 0.3s;
+  }
 `;

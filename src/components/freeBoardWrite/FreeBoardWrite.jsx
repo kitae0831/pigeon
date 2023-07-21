@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getFreeBoardt, addFreeBoard, delFreeBoard, fixFreeBoard } from '../../api/freeBoard';
+import { getFreeBoard, addFreeBoard, delFreeBoard, fixFreeBoard } from '../../api/freeBoard';
 import styled from 'styled-components';
 import { PinkButton, PurpleButton } from '../../shared/Buttons';
 
@@ -9,7 +9,7 @@ const FreeBoardWrite = () => {
 
   const fetchFreeBoard = async () => {
     try {
-      const data = await getFreeBoardt();
+      const data = await getFreeBoard();
       setFreeBoard(data);
     } catch (error) {
       console.error('Error fetching tests:', error);
