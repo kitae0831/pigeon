@@ -1,8 +1,8 @@
 import React from 'react';
-import MbtiTest from '../EandI/test';
+import EandItset from '../components/EandI/EandItest';
 
-function MbtiTest() {
-  return <MbtiTest />;
+function Personality() {
+  return <EandItset />;
 }
 
-export default MbtiTest;
+export default Personality;
