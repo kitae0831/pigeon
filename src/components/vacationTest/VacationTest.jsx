@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { PinkButton, PurpleButton } from '../../shared/Buttons';
+import { PinkButton, GreenButton } from '../../shared/Buttons';
 import { useNavigate } from 'react-router-dom';
 import { questions } from './VacationTestData';
 import styled from 'styled-components';
@@ -53,7 +53,7 @@ function VacationTest() {
             height: '5vh'
           }}
         >
-          <PinkButton onClick={() => navigate('/VacationResult', { state: { selectedAnswers: answers } })}>
+          <PinkButton onClick={() => navigate('/vacation-result', { state: { selectedAnswers: answers } })}>
             결과 확인!
           </PinkButton>
         </div>
@@ -97,8 +97,8 @@ function VacationTest() {
             ))}
           </div>
           <ButtonBox>
-            {currentQuestionIndex > 0 && <PurpleButton onClick={handlePreviousQuestion}>이전</PurpleButton>}
-            <PurpleButton onClick={handleNextQuestion}>다음</PurpleButton>
+            {currentQuestionIndex > 0 && <GreenButton onClick={handlePreviousQuestion}>이전</GreenButton>}
+            <GreenButton onClick={handleNextQuestion}>다음</GreenButton>
           </ButtonBox>
         </div>
       </Contaier>
@@ -118,18 +118,22 @@ const Contaier = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
 `;
 
 const Header = styled.div`
   display: flex;
   text-align: top;
   margin-bottom: 20px;
-  margin-top: -30vh;
+  margin-top: 30px;
 `;
 
 const ButtonBox = styled.div`
   margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  height: 100px;
+  gap: 10px;
 `;
 
 const Label = styled.div`

@@ -2,15 +2,16 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ITypeImage from '../../assets/I형.png';
 import { styled } from 'styled-components';
-import { PurpleButton } from '../../shared/Buttons';
+import { GreenButton } from '../../shared/Buttons';
 
 function EandIA_I({ onClose }) {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
     onClose();
-    navigate.push('/'); // 메인 페이지로 이동
+    navigate('/');
   };
+
 
   return (
     <ModalOverlay>
@@ -25,8 +26,8 @@ function EandIA_I({ onClose }) {
           <div>자신만의 생각에 깊이 몰두할 수 있는 장점이 있습니다.</div> 진중하고 신중한 성격으로, 주변의 평가에 크게
           영향을 받지 않는 자립심이 강합니다.
         </p>
-        <PurpleButton onClick={onClose}>닫기</PurpleButton>
-        <PurpleButton onClick={handleGoBack}>메인 페이지로</PurpleButton>
+        <GreenButton onClick={onClose}>다시하기</GreenButton>
+        <GreenButton onClick={handleGoBack}>메인 페이지로</GreenButton>
       </ModalContent>
     </ModalOverlay>
   );

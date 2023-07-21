@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { getAnimalTest } from '../../api/animalTest';
 import { styled } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { GreenButton } from '../../shared/Buttons';
 
 function AnimalTest() {
   const { isLoading, isError, data } = useQuery('animalTest', getAnimalTest);
@@ -178,9 +179,11 @@ function AnimalTest() {
           </MainBox>
         );
       })}
-      <PurpleButton type="button" onClick={resultHandelr}>
-        Click
-      </PurpleButton>
+      <div style={{height: "100px", display:"flex", justifyContent: "center"}}>
+      <GreenButton type="button" onClick={resultHandelr}>
+        결과 확인
+      </GreenButton>
+      </div>
     </div>
   );
 }
@@ -189,7 +192,6 @@ export default AnimalTest;
 
 const MainBox = styled.div`
   box-shadow: 10px 2px 10px 0px #8785a2;
-
   padding: 10px;
   margin: 20px;
 `;
@@ -217,27 +219,4 @@ const AnswerBoxB = styled.label`
 
 const AnswerBoxC = styled.label`
   display: inline-block;
-`;
-
-const PurpleButton = styled.button`
-  display: flex;
-  margin-right: auto;
-
-  box-sizing: border-box;
-
-  margin: 5px;
-  padding: 10px 15px;
-  background-color: var(--color_purple);
-  color: var(--color_gray);
-  border: none;
-  border-radius: 12px;
-  font-weight: 700;
-  text-align: center;
-  cursor: pointer;
-
-  &:hover {
-    background-color: var(--color_gray);
-    color: var(--color_purple);
-    transition: all 0.3s;
-  }
 `;

@@ -359,7 +359,7 @@
     }
   ],
   "imageScore": {
-    "score": 23
+    "score": 27
   },
   "imageResults": [
     {
@@ -407,26 +407,36 @@
   ],
   "FreeBoard": [
     {
-      "title": "",
-      "description": "ㅁㄴㅇㄹ",
+      "description": "가나다라",
+      "id": 1
+    },
+    {
+      "description": "마바사",
       "id": 2
     },
     {
-      "title": "",
-      "description": "sdafasdf",
+      "description": "아자차카",
       "id": 3
     },
     {
-      "id": 4,
-      "description": ""
+      "description": "타파하",
+      "id": 4
     },
     {
-      "id": 5,
-      "description": ""
+      "description": "마바사ㅋㅋ",
+      "id": 5
     },
     {
-      "id": 6,
-      "description": "asdfasdf"
+      "description": "마바사ㅎㅎ",
+      "id": 6
+    },
+    {
+      "description": "가나다라123",
+      "id": 7
+    },
+    {
+      "description": "수정 왜 안되니",
+      "id": 8
     }
   ]
 }

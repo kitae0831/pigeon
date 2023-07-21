@@ -16,7 +16,7 @@ const delFreeBoard = async (id) => {
 };
 
 const fixFreeBoard = async (newTest) => {
-  await axios.patch(`${URL}/FreeBoard/${newTest.id}`, { ...newTest });
+  await axios.patch(`${URL}/FreeBoard/${newTest.id}`, newTest);
 };
 
 export { getFreeBoard, addFreeBoard, delFreeBoard, fixFreeBoard };

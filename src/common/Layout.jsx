@@ -1,32 +1,23 @@
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import '../color.css';
 
 function Layout() {
-  // const [step, setStep] = useState(0);
-
-  // const getImg = (props) => {
-  //   if (slidesData[0].id == 1) {
-  //     return slidesData[0].img;
-  //   }
-  // };
+  const navigate = useNavigate();
 
   return (
     <Container>
+      <Contents>
       <Header>
-        <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
+        <Main onClick={() => navigate('/')} >
           오구오구
-        </Link>
-        {/* <div
-          style={{
-            display: 'flex',
-            gap: '12px'
-          }}
-        ></div> */}
+        </Main>
+        <FreeBoard onClick={() => navigate('/free-board')}>자유게시판</FreeBoard>
       </Header>
+  
       <Outlet />
+      </Contents>
       <Footer>
         <div>React 아웃소싱 프로젝트</div>
         {/* <a
@@ -36,6 +27,7 @@ function Layout() {
         /> */}
         <div>B반 9조 비둘기</div>
       </Footer>
+      
     </Container>
   );
 }
@@ -43,9 +35,8 @@ function Layout() {
 export default Layout;
 
 const Container = styled.div`
-  width: '100%';
-  height: '100%';
-  top: '0';
+  width: 100%;
+  top: 0;
   // min-height: 100vh;
   position: relative;
   // padding-bottom: 90px;
@@ -58,28 +49,48 @@ const Container = styled.div`
 const Header = styled.header`
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 0 20px 0 20px;
+  margin-top: 0;
   align-items: center;
-  background-color: none;
+  background-color: rgba( 255, 255, 255, 0.5 );
   color: white;
   font-weight: bold;
+  height: 2.9rem;
 `;
 
-const Footer = styled.footer`
-  margin-top: 24px;
-  display: flex;
-  justify-content: space-between;
-  padding: 24px;
-  background-color: none;
+const Main = styled.p`
+ text-decoration: none;
+ color: black;
+ &:hover {
+  cursor: pointer;
+}
+`
+
+const FreeBoard = styled.p`
   color: black;
-  position: fixed;
-  bottom: 0;
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+const Contents = styled.div`
+  min-height: calc(100vh - 2.9rem);
+  position: relative;
+`
+const Footer = styled.footer`
+  display: flex;
+  height: 2.9rem;
+  justify-content: space-between;
+  background-color: rgba( 255, 255, 255, 0.5 );
+  color: black;
+  /* position: absolute;
+  bottom: 0; */
   width: 100%;
   box-sizing: border-box;
-  // height:;
+  padding: 20px;
+  
   // display: flex;
   // justify-content: space-between;
-  // padding: 24px;
   // background-color: none;
   // color: black;
   // width: 100%;
