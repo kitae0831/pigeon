@@ -1,5 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
+import cityImg from '../assets/cityImg.png';
+import SeaVacationImg from '../assets/SeaVacationImg.png';
+import mountinVacationImg from '../assets/mountinVacationImg.png';
+import valleyImg from '../assets/valleyImg.png';
 
 function VacationResult() {
   const location = useLocation();
@@ -10,12 +15,6 @@ function VacationResult() {
     const answerB = Object.values(selectedAnswers).filter((choice) => choice === 2).length;
     const answerC = Object.values(selectedAnswers).filter((choice) => choice === 3).length;
     const answerD = Object.values(selectedAnswers).filter((choice) => choice === 4).length;
-
-    console.log('selectedAnswers:', selectedAnswers);
-    console.log('answerA:', answerA);
-    console.log('answerB:', answerB);
-    console.log('answerC:', answerC);
-    console.log('answerD:', answerD);
 
     let result = '';
     if (answerA >= answerB && answerA >= answerC && answerA >= answerD) {
@@ -31,13 +30,56 @@ function VacationResult() {
     return result;
   };
 
+  const renderVacationImage = () => {
+    const result = resultHandler();
+    let vacationImg = null;
+
+    switch (result) {
+      case '바다':
+        vacationImg = SeaVacationImg;
+        break;
+      case '산':
+        vacationImg = mountinVacationImg;
+        break;
+      case '계곡':
+        vacationImg = valleyImg;
+        break;
+      default:
+        vacationImg = cityImg;
+    }
+
+    return <img src={vacationImg} alt={result} />;
+  };
+
   return (
     <>
-      <div>
-        <h2>당신에게 맞는 휴가지는 {resultHandler()}입니다!</h2>
-      </div>
+      <ResultContainer>
+        <div>
+          <VacationImgWrapper>{renderVacationImage()}</VacationImgWrapper>
+          <h2>당신에게 맞는 휴가지는 {resultHandler()}입니다!</h2>
+        </div>
+      </ResultContainer>
     </>
   );
 }
 
 export default VacationResult;
+
+const ResultContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: #f2f2f2;
+  padding: 20px;
+`;
+
+const VacationImgWrapper = styled.div`
+  img {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 500px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+`;
