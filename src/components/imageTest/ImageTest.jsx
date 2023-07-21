@@ -14,18 +14,20 @@ function ImageTest() {
 
 
   const nextButtonClickHandler = async() => {
-    const checkedInputScore = await($(`input[name=${questionNumber}]:checked`).val())
+    const checkedInputScore = ($(`input[name=${questionNumber}]:checked`).val())
     // 라디오 버튼 체크된 값(checked value)
     // $('input[name="checkbox"]').is(':checked'); // 체크박스 체크 여부(checked)
-  if(checkedInputScore === undefined) {return alert("답변을 선택해주세요!")}
-    // await setTotalScore(totalScore + Number(checkedInputScore))
-  if(questionNumber === 9){
-    fixScore(totalScore + Number(checkedInputScore));
-    navigate('/image-result')
-  } else {
-    setQuestionNumber(questionNumber + 1)
-    setTotalScore(totalScore + Number(checkedInputScore))
-  }
+    if(checkedInputScore === undefined) {return alert("답변을 선택해주세요!")}
+      // await setTotalScore(totalScore + Number(checkedInputScore))
+    if(questionNumber === 9){
+      fixScore(totalScore + Number(checkedInputScore));
+      navigate('/image-result')
+    } else {
+      setQuestionNumber(questionNumber + 1)
+      setTotalScore(totalScore + Number(checkedInputScore))
+    }
+ 
+    $(`input[name=${questionNumber}]`).prop("checked", false); 
   }
 
   if (isLoading) {
@@ -33,6 +35,7 @@ function ImageTest() {
   }
   if (isError) {
     return <div>오류입니다.</div>;
+    
   }
 
   return (
@@ -43,10 +46,10 @@ function ImageTest() {
           return (
           <div key={a.id}>
           <input
-          type="radio"
-          id={a.id}
-          value={a.score}
-          name={questionNumber}
+            type="radio"
+            id={a.id}
+            value={a.score}
+            name={questionNumber}
           />
           <label>{a.answer}</label>
           </div>
@@ -57,7 +60,6 @@ function ImageTest() {
        onClick={nextButtonClickHandler}
        >{questionNumber===9? "결과 보기": "다음"}
       </PurpleButton>
-       <h1>{totalScore}</h1>
     </>
   )
 }

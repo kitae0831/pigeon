@@ -7,8 +7,9 @@ const getImageTest = async () => {
   return response.data;
 };
 
-const fixScore = async (score) => {
-  axios.patch(`${URL}/imageScore`, { score });
+const fixScore = async (s) => {
+  const response = await axios.patch(`${URL}/imageScore`, { score: s });
+  return response.data;
 };
 
 const getImageScore = async () => {
