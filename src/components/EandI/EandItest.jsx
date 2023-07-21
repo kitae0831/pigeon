@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Modal from './testModal';
+import Modal from './TestModal.jax'
 
 const MbtiTest = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
