@@ -2,9 +2,8 @@ import React from 'react'
 import { getImageScore } from '../api/imageTest'
 import { useQuery } from 'react-query';
 
-function ImageResult() {
-  const { isLoading, isError, data} = useQuery('imageScore', getImageScore);
-  const score = data.score
+function ImageResult () {
+  const { isLoading, isError, data } = useQuery('imageScore', getImageScore);
 
   if (isLoading) {
     return <div>로딩중입니다.</div>;
@@ -12,6 +11,8 @@ function ImageResult() {
   if (isError) {
     return <div>오류입니다.</div>;
   }
+
+  const { score } = data;
 
   if(score <= 20) {
     return <div>
