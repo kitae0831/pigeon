@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
 import { EandIQ } from './EandIQ';
-import Modal from './TestModal'; // 모달 컴포넌트를 가져옴
+import Modal from './TestModal';
+import EandIA_E from './EandIA_E'; // 외향적 결과 컴포넌트
+import EandIA_I from './EandIA_I'; // 내향적 결과 컴포넌트';
+import styled from 'styled-components';
+import { PurpleButton } from '../../shared/Buttons';
+import nightSky from '../../assets/night_sky.png'; // 별이 떠있는 밤하늘 이미지
 
 const EandItset = () => {
   const [selectedOptionId, setSelectedOptionId] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showResult, setShowResult] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달창 열림/닫힘 상태
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOptionClick = (optionId) => {
     setSelectedOptionId(optionId);
-    setIsModalOpen(false); // 선택지 클릭하면 모달창 닫음
+    setIsModalOpen(false);
   };
 
   const handleNextClick = () => {
     if (selectedOptionId === null) {
-      setIsModalOpen(true); // 선택지를 선택하지 않으면 모달창 열림
+      setIsModalOpen(true);
     } else if (currentQuestionIndex < EandIQ.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setSelectedOptionId(null);
@@ -31,60 +36,114 @@ const EandItset = () => {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleNextClick();
+    }
+  };
+
   const calculateResult = () => {
-    const selectedOption = EandIQ[currentQuestionIndex].choices.find((choice) => choice.id === selectedOptionId);
-    return selectedOption.text;
+    let sum = 0;
+    for (const question of EandIQ) {
+      const selectedChoice = question.choices.find((choice) => choice.id === selectedOptionId);
+      if (selectedChoice) {
+        if (selectedChoice.id === 1) {
+          sum += 1;
+        } else if (selectedChoice.id === 2) {
+          sum -= 1;
+        }
+      }
+    }
+    return sum;
   };
 
   const closeModal = () => {
     setSelectedOptionId(null);
     setCurrentQuestionIndex(0);
     setShowResult(false);
-    setIsModalOpen(false); // 모달창 닫기
+    setIsModalOpen(false);
+  };
+
+  const showResultModal = () => {
+    const result = calculateResult();
+    if (result >= 1) {
+      return <EandIA_E onClose={closeModal} />;
+    } else {
+      return <EandIA_I onClose={closeModal} />;
+    }
   };
 
   return (
-    <div>
+    <Container>
       <h1>나는 내향적인가 외향적인가?</h1>
-      {currentQuestionIndex < EandIQ.length && (
-        <div>
+      {currentQuestionIndex < EandIQ.length && !showResult && (
+        <QuestionContainer>
           <h3>{EandIQ[currentQuestionIndex].text}</h3>
-          <ul>
+          <Choices>
             {EandIQ[currentQuestionIndex].choices.map((choice) => (
-              <li key={choice.id}>
+              <Choice key={choice.id}>
                 <label>
                   <input
                     type="checkbox"
                     checked={selectedOptionId === choice.id}
                     onChange={() => handleOptionClick(choice.id)}
+                    onKeyDown={handleKeyDown}
                   />
                   {choice.text}
                 </label>
-              </li>
+              </Choice>
             ))}
-          </ul>
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-            {currentQuestionIndex > 0 && (
-              <button style={{ marginRight: '10px' }} onClick={handlePrevClick}>
-                이전
-              </button>
-            )}
-            <button onClick={handleNextClick}>다음</button>
-          </div>
-        </div>
+          </Choices>
+          <ButtonsContainer>
+            {currentQuestionIndex > 0 && <PurpleButton onClick={handlePrevClick}>이전</PurpleButton>}
+            <PurpleButton onClick={handleNextClick}>다음</PurpleButton>
+          </ButtonsContainer>
+        </QuestionContainer>
       )}
 
-      {showResult && (
-        <div>
-          <h2>나의 성향</h2>
-          <p>{calculateResult()}</p>
-          <button onClick={closeModal}>닫기</button>
-        </div>
-      )}
+      {showResult && <ResultContainer>{showResultModal()}</ResultContainer>}
 
       {isModalOpen && <Modal onClose={() => setIsModalOpen(false)}>선택지를 하나 이상 선택해주세요.</Modal>}
-    </div>
+    </Container>
   );
 };
 
 export default EandItset;
+
+const Container = styled.div`
+  background-color: #121721; /* 밤하늘 색상 */
+  color: #fff;
+  padding: 20px;
+`;
+
+const QuestionContainer = styled.div`
+  background-image: url(${nightSky});
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+`;
+
+const Choices = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+const Choice = styled.li`
+  margin-bottom: 10px;
+`;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+const ResultContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
