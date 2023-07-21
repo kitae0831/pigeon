@@ -7,8 +7,8 @@ const getImageTest = async () => {
   return response.data;
 };
 
-const fixScore = async (s) => {
-  const response = await axios.patch(`${URL}/imageScore`, { score: s });
+const fixScore = async (score) => {
+  const response = await axios.patch(`${URL}/imageScore`, { score });
   return response.data;
 };
 
@@ -17,16 +17,9 @@ const getImageScore = async () => {
   return response.data;
 };
 
-// const addImageTest = async (newTest) => {
-//   await axios.post(`${URL}/imageTest`, newTest);
-// };
+const getImageResult = async () => {
+  const response = await axios.get(`${URL}/imageResults`);
+  return response.data;
+};
 
-// const delImageTest = async (id) => {
-//   await axios.delete(`${URL}/imageTest/${id}`);
-// };
-
-// const fixImageTest = async (newTest) => {
-//   await axios.patch(`${URL}/imageTest/${newTest.id}`, { ...newTest });
-// };
-
-export { getImageTest, fixScore, getImageScore };
+export { getImageTest, fixScore, getImageScore, getImageResult };
