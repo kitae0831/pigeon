@@ -7,10 +7,10 @@ function Bird() {
     <Container>
       <MainBox>
         <div>
+          <h1>당신은 <Result>새</Result>와 비슷한 성격을 가진 사람입니다.</h1>
           <BirdImg src={Birds} alt="" />
         </div>
         <ContetnsBox>
-          <h1>당신은 새와 비슷한 성격을 가진 사람입니다.</h1>
           <h3>자유로움과 적극성으로 주변 사람들을 밝게 만들어주는 타입이에요.</h3>
           <p>
             당신은 새와 같이 자유롭고 적극적인 성격을 가지고 있습니다.
@@ -44,3 +44,9 @@ const BirdImg = styled.img`
   width: 500px;
   height: 500px;
 `;
+
+const Result = styled.span`
+  text-shadow: 1px 1px 2px var(--color_dark_green);
+  text-decoration: underline var(--color_green) 3px;
+  font-size: 30px;
+`
