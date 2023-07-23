@@ -2,6 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import { GreenButton } from '../../shared/Buttons';
 
+const TestModal = ({ onClose }) => {
+  return (
+    <ModalOverlay>
+      <ModalContent>
+        <ModalText>선택지를 하나 이상 선택해주세요.</ModalText>
+        <GreenButton onClick={onClose}>알겠습니다.</GreenButton>
+      </ModalContent>
+    </ModalOverlay>
+  );
+};
+
+export default TestModal;
+
 const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -16,12 +29,12 @@ const ModalOverlay = styled.div`
 
 const ModalContent = styled.div`
   background-color: #8785a2;
-  color: white; /* 흰색 텍스트 색상 */
+  color: white;
   padding: 20px;
-  border-radius: 10px; /* 모서리를 둥글게 처리 */
+  border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   display: flex;
-  flex-direction: column; /* 상하 중앙 정렬을 위해 컨텐츠를 컬럼으로 배치 */
+  flex-direction: column;
   align-items: center;
 `;
 
@@ -29,16 +42,3 @@ const ModalText = styled.p`
   font-size: 18px;
   margin-bottom: 20px;
 `;
-
-const TestModal = ({ onClose }) => {
-  return (
-    <ModalOverlay>
-      <ModalContent>
-        <ModalText>선택지를 하나 이상 선택해주세요.</ModalText>
-        <GreenButton onClick={onClose}>알겠습니다.</GreenButton>
-      </ModalContent>
-    </ModalOverlay>
-  );
-};
-
-export default TestModal;

@@ -37,10 +37,7 @@ const Outer = styled.div`
 const Inner = styled.div`
   display: flex;
   flex-direction: column;
-
   padding: 24px;
-
   background-color: #ffffff;
-
   border-radius: 24px;
 `;

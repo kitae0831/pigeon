@@ -68,8 +68,6 @@ const Footer = styled.footer`
   justify-content: space-between;
   background-color: rgba(255, 255, 255, 0.5);
   color: black;
-  /* position: absolute;
-  bottom: 0; */
   width: 100%;
   box-sizing: border-box;
   padding: 20px;

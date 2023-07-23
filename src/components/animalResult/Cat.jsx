@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 
 function Cat() {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: "center" }}>
+    <Container>
       <MainBox>
         <div>
           <CatImg src={Cats} alt="" />
@@ -24,11 +24,18 @@ function Cat() {
           </p>
         </ContetnsBox>
       </MainBox>
-    </div>
+    </Container>
   );
 }
 
 export default Cat;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
 
 const MainBox = styled.div``;
 

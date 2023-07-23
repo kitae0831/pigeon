@@ -77,32 +77,40 @@ const SlideContainer = styled.div`
   top: 0;
   left: 0;
   z-index: -1;
+
   display: flex;
   width: 500%;
+
   transform: translateX(${({ step }) => step * -20}%);
   transition: transform 0.7s ease-in-out;
 `;
+
 const MainBox = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
 `;
+
 const BackgroundImg = styled.div`
   width: 100%;
   height: 100%;
   min-height: 100vh;
+
   background-position: center;
   background-size: cover;
   background-image: url(${(props) => props.bgimage});
 `;
+
 const TestBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
+
 const MainTitle = styled.h1`
   font-size: 40px;
 `;
+
 const TextBox = styled.div`
   height: 200px;
   text-align: center;
@@ -110,24 +118,30 @@ const TextBox = styled.div`
   margin: 150px 0 60px 0;
   white-space: pre-line;
 `;
+
 const ContentBox = styled.div`
   width: 100%;
 `;
+
 const LeftImg = styled.img`
   width: 50px;
   height: 50px;
   position: fixed;
   bottom: 50%;
   left: 0.5rem;
+
   border-radius: 100px;
   cursor: pointer;
 `;
+
 const RightImg = styled.img`
   width: 50px;
   height: 50px;
+
   position: fixed;
   bottom: 50%;
   right: 0.5rem;
   border-radius: 100px;
+
   cursor: pointer;
 `;

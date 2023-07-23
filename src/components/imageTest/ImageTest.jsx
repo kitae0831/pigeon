@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { getImageTest, fixScore } from '../../api/imageTest';
-import { useState } from 'react';
 import $ from 'jquery';
 import { GreenButton } from '../../shared/Buttons';
 import { useNavigate } from 'react-router-dom';
@@ -16,12 +15,9 @@ function ImageTest() {
 
   const nextButtonClickHandler = async () => {
     const checkedInputScore = $(`input[name=${questionNumber}]:checked`).val();
-    // 라디오 버튼 체크된 값(checked value)
-    // $('input[name="checkbox"]').is(':checked'); // 체크박스 체크 여부(checked)
     if (checkedInputScore === undefined) {
       return alert('답변을 선택해주세요!');
     }
-    // await setTotalScore(totalScore + Number(checkedInputScore))
     if (questionNumber === 9) {
       fixScore(totalScore + Number(checkedInputScore));
       navigate('/image-result');
@@ -42,24 +38,22 @@ function ImageTest() {
 
   return (
     <StContainer>
-      <h1 style={{ color: 'var(--color_dark_green', fontSize: "40px"}}>이미지 테스트 😎</h1>
+      <ImgTestTitle>이미지 테스트 😎</ImgTestTitle>
       <QuestionBox>
-        <h2 style={{fontSize: "30px"}}>
+        <Question>
           {questionNumber + 1}.&nbsp;{data[questionNumber].question}
-        </h2>
+        </Question>
         <AnswerBox>
           {data[questionNumber].answers.map((a) => {
             return (
               <div key={a.id}>
-                <input type="radio" id={a.id} value={a.score} name={questionNumber} style={{ cursor: 'pointer' }} />
-                <label htmlFor={a.id} style={{ fontWeight: 'bold', cursor: 'pointer' }}>
-                  {a.answer}
-                </label>
+                <Input type="radio" id={a.id} value={a.score} name={questionNumber} />
+                <Label htmlFor={a.id}>{a.answer}</Label>
               </div>
             );
           })}
         </AnswerBox>
-        <GreenButton onClick={nextButtonClickHandler} style={{width:'200px'}}>
+        <GreenButton onClick={nextButtonClickHandler} style={{ width: '200px' }}>
           {questionNumber === 9 ? '결과 확인하기 !' : '다음'}
         </GreenButton>
       </QuestionBox>
@@ -76,6 +70,11 @@ const StContainer = styled.div`
   justify-content: center;
 `;
 
+const ImgTestTitle = styled.h1`
+  color: var(--color_dark_green);
+  font-size: 40px;
+`;
+
 const QuestionBox = styled.div`
   display: flex;
   height: 550px;
@@ -87,6 +86,11 @@ const QuestionBox = styled.div`
   border-radius: 20px;
   width: 850px;
 `;
+
+const Question = styled.h2`
+  font-size: 30px;
+`;
+
 const AnswerBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -96,5 +100,13 @@ const AnswerBox = styled.div`
   height: 300px;
   padding-left: 50px;
   box-sizing: border-box;
+`;
 
+const Input = styled.input`
+  cursor: pointer;
+`;
+
+const Label = styled.label`
+  font-weight: bold;
+  cursor: pointer;
 `;

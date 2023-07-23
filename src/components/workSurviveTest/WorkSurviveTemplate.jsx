@@ -79,7 +79,7 @@ function WorkSurviveTemplate() {
           <h3>{WorkSurviveTest[step].question}</h3>
           {WorkSurviveTest[step].answers.map((item) => {
             return (
-              <InputBox key={item.score}>
+              <div key={item.score}>
                 <form>
                   <AnswerLabel>
                     <input
@@ -93,7 +93,7 @@ function WorkSurviveTemplate() {
                   </AnswerLabel>
                 </form>
                 {console.log(score)}
-              </InputBox>
+              </div>
             );
           })}
           <ButtonBox>
@@ -137,11 +137,6 @@ const Title = styled.p`
   margin-bottom: 40px;
   /* 그림자 스타일 추가 */
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-`;
-
-const InputBox = styled.div`
-  /* text-align: center;
-  width: 50%; */
 `;
 
 const AnswerLabel = styled.label`

@@ -12,10 +12,10 @@ function Personality() {
   );
 }
 
+export default Personality;
+
 const Container = styled.div`
   background-color: #121721; /* 밤하늘 색상 */
   color: #fff;
   padding: 20px;
 `;
-
-export default Personality;
