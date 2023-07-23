@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 
 function Bird() {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: "center" }}>
+    <Container>
       <MainBox>
         <div>
           <BirdImg src={Birds} alt="" />
@@ -23,11 +23,18 @@ function Bird() {
           </p>
         </ContetnsBox>
       </MainBox>
-    </div>
+    </Container>
   );
 }
 
 export default Bird;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
 
 const MainBox = styled.div``;
 

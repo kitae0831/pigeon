@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { getAnimalTest } from '../../api/animalTest';
 import { styled } from 'styled-components';
@@ -68,7 +68,6 @@ function AnimalTest() {
                       const tempItem = {
                         ...state[checkProlbemIsAlreadyExistIndex]
                       };
-
                       tempItem.selectedAnswer = e.target.value;
 
                       setState((prev) => {
@@ -179,11 +178,11 @@ function AnimalTest() {
           </MainBox>
         );
       })}
-      <div style={{height: "100px", display:"flex", justifyContent: "center"}}>
-      <GreenButton type="button" onClick={resultHandelr}>
-        결과 확인
-      </GreenButton>
-      </div>
+      <ResultBtnBox>
+        <GreenButton type="button" onClick={resultHandelr}>
+          결과 확인
+        </GreenButton>
+      </ResultBtnBox>
     </div>
   );
 }
@@ -219,4 +218,10 @@ const AnswerBoxB = styled.label`
 
 const AnswerBoxC = styled.label`
   display: inline-block;
+`;
+
+const ResultBtnBox = styled.div`
+  height: 100px;
+  display: flex;
+  justify-content: center;
 `;

@@ -4,9 +4,9 @@ import ETypeImage from '../../assets/E형.png';
 import { styled } from 'styled-components';
 import { GreenButton } from '../../shared/Buttons';
 
-function EandIA_E({ onClose }) {
+function EandIAE({ onClose }) {
   const navigate = useNavigate();
-  
+
   const handleGoBack = () => {
     onClose();
     navigate('/');
@@ -15,22 +15,24 @@ function EandIA_E({ onClose }) {
   return (
     <ModalOverlay>
       <ModalContent>
-        <h2 style={{ color: '#fff' }}>나의 성향</h2>
+        <h2>나의 성향</h2>
         <ImageBox>
           <EImage src={ETypeImage} alt="외향적인 성향 이미지" />
         </ImageBox>
-        <p style={{ color: '#fff', marginBottom: '10px' }}>외향적인 성향</p>
-        <p style={{ color: '#fff', marginBottom: '20px' }}>
+        <ResultTitle>외향적인 성향</ResultTitle>
+        <ResultContent>
           외향적인 사람은 활발하고 사교적입니다.
           <div>매력적인 성격으로 주변 사람들과 쉽게 친구가 될 수 있으며, 새로운 사람들과의 인연을 즐깁니다.</div>{' '}
           긍정적인 에너지를 뿜어내어 주변을 밝게 만들어주는 장점이 있습니다.
-        </p>
+        </ResultContent>
         <GreenButton onClick={onClose}>다시하기</GreenButton>
         <GreenButton onClick={handleGoBack}>메인 페이지로</GreenButton>
       </ModalContent>
     </ModalOverlay>
   );
 }
+
+export default EandIAE;
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -52,18 +54,18 @@ const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center; /* 글자 중앙 정렬 */
+  text-align: center;
 
   h2 {
     color: #fff;
     margin-bottom: 10px;
-    font-size: 24px; /* 글자 크기 조정 */
+    font-size: 24px;
   }
 
   h3 {
     color: #fff;
     margin-bottom: 10px;
-    font-size: 18px; /* 글자 크기 조정 */
+    font-size: 18px;
   }
 `;
 
@@ -78,9 +80,17 @@ const ImageBox = styled.div`
   margin-bottom: 10px;
 `;
 
+const ResultTitle = styled.p`
+  color: #fff;
+  margin-bottom: 10px;
+`;
+
+const ResultContent = styled.p`
+  color: #fff;
+  margin-bottom: 20px;
+`;
+
 const EImage = styled.img`
   width: 200px;
   height: 200px;
 `;
-
-export default EandIA_E;

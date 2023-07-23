@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { PinkButton, GreenButton } from '../../shared/Buttons';
 import { useNavigate } from 'react-router-dom';
 import { questions } from './VacationTestData';
@@ -32,31 +31,16 @@ function VacationTest() {
   };
 
   if (currentQuestionIndex >= questions.length) {
-    // 모든 질문에 대한 선택이 완료되면 여기에 결과를 표시하거나 다른 동작을 수행할 수 있습니다.
     return (
       <>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '10vh'
-          }}
-        >
+        <ResultContainer>
           <div>설문 조사가 완료되었습니다! 결과를 확인하세요!</div>
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '5vh'
-          }}
-        >
+        </ResultContainer>
+        <ResultBtnBox>
           <PinkButton onClick={() => navigate('/vacation-result', { state: { selectedAnswers: answers } })}>
             결과 확인!
           </PinkButton>
-        </div>
+        </ResultBtnBox>
       </>
     );
   }
@@ -75,12 +59,7 @@ function VacationTest() {
           <div>
             <h3>{currentQuestion.text}</h3>
           </div>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column'
-            }}
-          >
+          <QuestionBox>
             {currentQuestion.choices.map((choice) => (
               <Label>
                 <label key={choice.id}>
@@ -95,7 +74,7 @@ function VacationTest() {
                 </label>
               </Label>
             ))}
-          </div>
+          </QuestionBox>
           <ButtonBox>
             {currentQuestionIndex > 0 && <GreenButton onClick={handlePreviousQuestion}>이전</GreenButton>}
             <GreenButton onClick={handleNextQuestion}>다음</GreenButton>
@@ -136,6 +115,25 @@ const ButtonBox = styled.div`
   gap: 10px;
 `;
 
+const QuestionBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Label = styled.div`
   margin-bottom: 10px;
+`;
+
+const ResultContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+`;
+
+const ResultBtnBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
 `;

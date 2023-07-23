@@ -1,10 +1,8 @@
-import React from 'react'
-import ImageTest from '../components/imageTest/ImageTest'
+import React from 'react';
+import ImageTest from '../components/imageTest/ImageTest';
 
 function Image() {
-  return (
-    <ImageTest/>
-  )
+  return <ImageTest />;
 }
 
-export default Image
+export default Image;

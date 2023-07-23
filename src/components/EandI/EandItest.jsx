@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { EandIQ } from './EandIQ';
 import Modal from './TestModal';
-import EandIA_E from './EandIA_E'; // 외향적 결과 컴포넌트
-import EandIA_I from './EandIA_I'; // 내향적 결과 컴포넌트';
+import EandIAE from './EandIAE'; // 외향적 결과 컴포넌트
+import EandIAI from './EandIAI'; // 내향적 결과 컴포넌트';
 import styled from 'styled-components';
 import { GreenButton } from '../../shared/Buttons';
 import nightSky from '../../assets/night_sky.png'; // 별이 떠있는 밤하늘 이미지
@@ -67,9 +67,9 @@ const EandItset = () => {
   const showResultModal = () => {
     const result = calculateResult();
     if (result >= 1) {
-      return <EandIA_E onClose={closeModal} />;
+      return <EandIAE onClose={closeModal} />;
     } else {
-      return <EandIA_I onClose={closeModal} />;
+      return <EandIAI onClose={closeModal} />;
     }
   };
 
@@ -113,7 +113,7 @@ export default EandItset;
 const Container = styled.div`
   margin-top: 150px;
   margin-bottom: 150px;
-  background-color: #121721; /* 밤하늘 색상 */
+  background-color: #121721;
   height: 400px;
   color: #fff;
   padding: 20px;
@@ -140,7 +140,7 @@ const Choice = styled.li`
 `;
 
 const ButtonsContainer = styled.div`
-height: 50px;
+  height: 50px;
   display: flex;
   justify-content: center;
   margin-top: 20px;

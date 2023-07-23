@@ -407,36 +407,16 @@
   ],
   "FreeBoard": [
     {
-      "description": "가나다라",
-      "id": 1
+      "description": "ㅇㄴㅁㄹㄴㅁㅇㄹㄴㅁㅇㄹ",
+      "id": 12
     },
     {
-      "description": "마바사",
-      "id": 2
+      "description": "ㅁㄴㄻㄴㅇㄹ",
+      "id": 13
     },
     {
-      "description": "아자차카",
-      "id": 3
-    },
-    {
-      "description": "타파하",
-      "id": 4
-    },
-    {
-      "description": "마바사ㅋㅋ",
-      "id": 5
-    },
-    {
-      "description": "마바사ㅎㅎ",
-      "id": 6
-    },
-    {
-      "description": "가나다라123",
-      "id": 7
-    },
-    {
-      "description": "수정 왜 안되니",
-      "id": 8
+      "description": "ㄴㅇㅁㄹㄴㅇㄹ",
+      "id": 14
     }
   ]
 }

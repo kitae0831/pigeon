@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Bird from '../components/animalResult/Bird';
 import Cat from '../components/animalResult/Cat';
 import Dog from '../components/animalResult/Dog';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function Search() {
   const { id } = useParams();

@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 
 function Dog() {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: "center" }}>
+    <Container>
       <MainBox>
         <div>
           <DogImg src={Dogs} alt="" />
@@ -23,17 +23,22 @@ function Dog() {
           </p>
         </ContetnsBox>
       </MainBox>
-    </div>
+    </Container>
   );
 }
 
 export default Dog;
 
-const MainBox = styled.div`
-
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 `;
 
-const ContetnsBox = styled.div``
+const MainBox = styled.div``;
+
+const ContetnsBox = styled.div``;
 
 const DogImg = styled.img`
   width: 500px;
