@@ -7,10 +7,10 @@ function Dog() {
     <Container>
       <MainBox>
         <div>
+          <h1>당신은 <ResultSpan>강아지</ResultSpan>와 비슷한 성격을 가진 사람입니다. </h1>
           <DogImg src={Dogs} alt="" />
         </div>
         <ContetnsBox>
-          <h1>당신은 강아지와 비슷한 성격을 가진 사람입니다. </h1>
           <h3>따뜻하고 친절한 성격으로 주변 사람들에게 편안함을 주는 타입이에요.</h3>
           <p>
             당신은 강아지와 같이 다정하고 친절한 성격을 가지고 있습니다.
@@ -44,3 +44,9 @@ const DogImg = styled.img`
   width: 500px;
   height: 500px;
 `;
+
+const ResultSpan = styled.span`
+  text-shadow: 1px 1px 2px var(--color_dark_green);
+  text-decoration: underline var(--color_green) 3px;
+  font-size: 30px;
+`
