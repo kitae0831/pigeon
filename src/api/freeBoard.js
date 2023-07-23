@@ -9,19 +9,18 @@ const getFreeBoard = async () => {
 };
 
 // 추가하기
-const addFreeBoard = async newTest => {
-  await axios.post(`${URL}/FreeBoard`, newTest);
+const addFreeBoard = async (newContent) => {
+  await axios.post(`${URL}/FreeBoard`, newContent);
 };
 
 // 삭제하기
-const delFreeBoard = async id => {
+const delFreeBoard = async (id) => {
   await axios.delete(`${URL}/FreeBoard/${id}`);
 };
 
 // 수정하기
-const fixFreeBoard = async newTest => {
-  console.log('newTest', newTest);
-  await axios.put(`${URL}/FreeBoard/${newTest.id}`, newTest);
+const fixFreeBoard = async (newContent) => {
+  await axios.put(`${URL}/FreeBoard/${newContent.id}`, newContent);
 };
 
 export { getFreeBoard, addFreeBoard, delFreeBoard, fixFreeBoard };

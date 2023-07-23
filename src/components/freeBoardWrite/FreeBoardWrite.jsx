@@ -4,16 +4,16 @@ import styled from 'styled-components';
 import { PinkButton } from '../../shared/Buttons';
 import writeIcon from '../../assets/writeIcon.png';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
+import Modal from '../../shared/Modal';
+import { useParams } from 'react-router-dom';
 
 const FreeBoardWrite = () => {
-  const [FreeBoard, setFreeBoard] = useState([]);
-  const [newTest, setNewTest] = useState({ title: '', description: '' });
+  const [content, setContent] = useState({ title: '', description: '' });
 
   // 조회하기
-  // 1. 쿼리 클라이언트 선언
-  // 2. const { isLoading, isError, data } = useQuery('FreeBoard', getFreeBoard);
   const queryClient = useQueryClient();
   const { isLoading, isError, data } = useQuery('FreeBoard', getFreeBoard);
+  const params = useParams();
 
   // 추가하기
   const mutationAdd = useMutation(addFreeBoard, {
@@ -21,10 +21,11 @@ const FreeBoardWrite = () => {
       queryClient.invalidateQueries('FreeBoard');
     }
   });
-  const onClickAddFreeBoard = e => {
+
+  const handleSubmitBtn = (e) => {
     e.preventDefault();
-    if (newTest.description === '') return;
-    mutationAdd.mutate(newTest);
+    if (content.description === '') return;
+    mutationAdd.mutate(content);
   };
 
   // 삭제하기
@@ -33,9 +34,10 @@ const FreeBoardWrite = () => {
       queryClient.invalidateQueries('FreeBoard');
     }
   });
-  const onClickDeleteFreeBoard = test => {
-    const checkConfirm = window.confirm('너 정말 삭제할꺼야?');
-    if (checkConfirm) return mutationDelete.mutate(test);
+
+  const handleDeleteBtn = (content) => {
+    const checkConfirm = window.confirm('삭제하시겠습니까?');
+    if (checkConfirm) return mutationDelete.mutate(content);
   };
 
   // 수정하기
@@ -44,8 +46,9 @@ const FreeBoardWrite = () => {
       queryClient.invalidateQueries('FreeBoard');
     }
   });
-  const onClickUpdateFreeBoard = id => {
-    const updateText = window.prompt('수정할 내용을 적어줘!');
+
+  const handleUpdateBtn = (id) => {
+    const updateText = window.prompt('수정할 내용을 입력하세요.');
     const newData = {
       id,
       description: updateText
@@ -53,27 +56,29 @@ const FreeBoardWrite = () => {
     mutationUpdate.mutate(newData);
   };
 
-  if (isLoading) return '대기중';
-  if (isError) return '에러임';
+  if (isLoading) return '로딩중입니다.';
+
+  if (isError) return 'ERROR';
+
   return (
     <div>
       <Title>자유게시판</Title>
-      <Form onSubmit={e => onClickAddFreeBoard(e)}>
+      <Form onSubmit={(e) => handleSubmitBtn(e)}>
         <CommentInput
           type="text"
-          value={newTest.description}
-          onChange={e => setNewTest({ description: e.target.value })}
+          value={content.description}
+          onChange={(e) => setContent({ description: e.target.value })}
           placeholder="Description"
         />
-        <WriteIcon src={writeIcon} onClick={e => onClickAddFreeBoard(e)} />
+        <WriteIcon src={writeIcon} onClick={(e) => handleSubmitBtn(e)} />
       </Form>
 
-      {data.map(test => (
-        <CommentListBox key={test.id}>
-          <p>{test.description}</p>
+      {data.map((content) => (
+        <CommentListBox key={content.id}>
+          <p>{content.description}</p>
           <div>
-            <PinkButton onClick={() => onClickUpdateFreeBoard(test.id)}>수정</PinkButton>
-            <PinkButton onClick={() => onClickDeleteFreeBoard(test.id)}>삭제</PinkButton>
+            <PinkButton onClick={() => handleUpdateBtn(content.id)}>수정</PinkButton>
+            <PinkButton onClick={() => handleDeleteBtn(content.id)}>삭제</PinkButton>
           </div>
         </CommentListBox>
       ))}
