@@ -7,10 +7,10 @@ function Cat() {
     <Container>
       <MainBox>
         <div>
+          <h1>당신은 <Result>고양이</Result>와 비슷한 성격을 가진 사람입니다.</h1>
           <CatImg src={Cats} alt="" />
         </div>
         <ContetnsBox>
-          <h1>당신은 고양이와 비슷한 성격을 가진 사람입니다.</h1>
           <h3>독립적이면서도 민첩하고 혼자서도 즐거움을 찾는 타입이에요.</h3>
           <p>
             당신은 고양이와 같이 독립적이고 자기만의 공간과 시간을 중요하게 여깁니다. 혼자서도 즐거운 시간을 보내는 것을
@@ -45,3 +45,9 @@ const CatImg = styled.img`
   width: 500px;
   height: 500px;
 `;
+
+const Result = styled.span`
+  text-shadow: 1px 1px 2px var(--color_dark_green);
+  text-decoration: underline var(--color_green) 3px;
+  font-size: 30px;
+`
