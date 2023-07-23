@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { GreenButton } from '../../shared/Buttons';
 
-const TestModal = ({ onClose }) => {
+const EandIModal = ({ onClose }) => {
   return (
     <ModalOverlay>
       <ModalContent>
@@ -13,7 +13,7 @@ const TestModal = ({ onClose }) => {
   );
 };
 
-export default TestModal;
+export default EandIModal;
 
 const ModalOverlay = styled.div`
   position: fixed;

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { EandIQ } from './EandIQ';
-import Modal from './TestModal';
-import EandIAE from './EandIAE'; // 외향적 결과 컴포넌트
-import EandIAI from './EandIAI'; // 내향적 결과 컴포넌트';
+import Modal from './EandIModal';
+import EandIAE from './EandIAE';
+import EandIAI from './EandIAI';
 import styled from 'styled-components';
 import { GreenButton } from '../../shared/Buttons';
-import nightSky from '../../assets/night_sky.png'; // 별이 떠있는 밤하늘 이미지
+import nightSky from '../../assets/night_sky.png';
 
 const EandItset = () => {
   const [selectedOptionId, setSelectedOptionId] = useState(null);
