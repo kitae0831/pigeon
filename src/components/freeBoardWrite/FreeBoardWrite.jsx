@@ -1,74 +1,79 @@
 import React, { useState, useEffect } from 'react';
 import { getFreeBoard, addFreeBoard, delFreeBoard, fixFreeBoard } from '../../api/freeBoard';
 import styled from 'styled-components';
-import { PinkButton, GreenButton } from '../../shared/Buttons';
+import { PinkButton } from '../../shared/Buttons';
 import writeIcon from '../../assets/writeIcon.png';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 const FreeBoardWrite = () => {
   const [FreeBoard, setFreeBoard] = useState([]);
   const [newTest, setNewTest] = useState({ title: '', description: '' });
 
-  const fetchFreeBoard = async () => {
-    try {
-      const data = await getFreeBoard();
-      setFreeBoard(data);
-    } catch (error) {
-      console.error('Error fetching tests:', error);
-    }
-  };
+  // 조회하기
+  // 1. 쿼리 클라이언트 선언
+  // 2. const { isLoading, isError, data } = useQuery('FreeBoard', getFreeBoard);
+  const queryClient = useQueryClient();
+  const { isLoading, isError, data } = useQuery('FreeBoard', getFreeBoard);
 
-  const handleSubmit = async (e) => {
+  // 추가하기
+  const mutationAdd = useMutation(addFreeBoard, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('FreeBoard');
+    }
+  });
+  const onClickAddFreeBoard = e => {
     e.preventDefault();
-    try {
-      await addFreeBoard(newTest);
-      setNewTest({ id: '', description: '' });
-      fetchFreeBoard();
-    } catch (error) {
-      console.error('Error adding test:', error);
-    }
+    if (newTest.description === '') return;
+    mutationAdd.mutate(newTest);
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await delFreeBoard(id);
-      fetchFreeBoard();
-    } catch (error) {
-      console.error('Error deleting test:', error);
+  // 삭제하기
+  const mutationDelete = useMutation(delFreeBoard, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('FreeBoard');
     }
+  });
+  const onClickDeleteFreeBoard = test => {
+    const checkConfirm = window.confirm('너 정말 삭제할꺼야?');
+    if (checkConfirm) return mutationDelete.mutate(test);
   };
 
-  const handleUpdate = async (test) => {
-    try {
-      setNewTest(test);
-      await fixFreeBoard(newTest.description);
-      fetchFreeBoard();
-    } catch (error) {
-      console.error('Error updating test:', error);
+  // 수정하기
+  const mutationUpdate = useMutation(fixFreeBoard, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('FreeBoard');
     }
+  });
+  const onClickUpdateFreeBoard = id => {
+    const updateText = window.prompt('수정할 내용을 적어줘!');
+    const newData = {
+      id,
+      description: updateText
+    };
+    mutationUpdate.mutate(newData);
   };
 
-  useEffect(() => {
-    fetchFreeBoard();
-  }, []);
-
+  if (isLoading) return '대기중';
+  if (isError) return '에러임';
   return (
     <div>
       <Title>자유게시판</Title>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={e => onClickAddFreeBoard(e)}>
         <CommentInput
           type="text"
           value={newTest.description}
-          onChange={(e) => setNewTest({ description: e.target.value })}
+          onChange={e => setNewTest({ description: e.target.value })}
           placeholder="Description"
         />
-        <WriteIcon src={writeIcon} onClick={handleSubmit} />
+        <WriteIcon src={writeIcon} onClick={e => onClickAddFreeBoard(e)} />
       </Form>
-      {FreeBoard.map((test) => (
+
+      {data.map(test => (
         <CommentListBox key={test.id}>
           <p>{test.description}</p>
           <div>
-            <PinkButton onClick={() => handleUpdate(test)}>수정</PinkButton>
-            <PinkButton onClick={() => handleDelete(test.id)}>삭제</PinkButton>
+            <PinkButton onClick={() => onClickUpdateFreeBoard(test.id)}>수정</PinkButton>
+            <PinkButton onClick={() => onClickDeleteFreeBoard(test.id)}>삭제</PinkButton>
           </div>
         </CommentListBox>
       ))}
