@@ -1,74 +1,84 @@
 import React, { useState, useEffect } from 'react';
 import { getFreeBoard, addFreeBoard, delFreeBoard, fixFreeBoard } from '../../api/freeBoard';
 import styled from 'styled-components';
-import { PinkButton, GreenButton } from '../../shared/Buttons';
+import { PinkButton } from '../../shared/Buttons';
 import writeIcon from '../../assets/writeIcon.png';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import Modal from '../../shared/Modal';
+import { useParams } from 'react-router-dom';
 
 const FreeBoardWrite = () => {
-  const [FreeBoard, setFreeBoard] = useState([]);
-  const [newTest, setNewTest] = useState({ title: '', description: '' });
+  const [content, setContent] = useState({ title: '', description: '' });
 
-  const fetchFreeBoard = async () => {
-    try {
-      const data = await getFreeBoard();
-      setFreeBoard(data);
-    } catch (error) {
-      console.error('Error fetching tests:', error);
+  // 조회하기
+  const queryClient = useQueryClient();
+  const { isLoading, isError, data } = useQuery('FreeBoard', getFreeBoard);
+  const params = useParams();
+
+  // 추가하기
+  const mutationAdd = useMutation(addFreeBoard, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('FreeBoard');
     }
-  };
+  });
 
-  const handleSubmit = async (e) => {
+  const handleSubmitBtn = (e) => {
     e.preventDefault();
-    try {
-      await addFreeBoard(newTest);
-      setNewTest({ id: '', description: '' });
-      fetchFreeBoard();
-    } catch (error) {
-      console.error('Error adding test:', error);
-    }
+    if (content.description === '') return;
+    mutationAdd.mutate(content);
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await delFreeBoard(id);
-      fetchFreeBoard();
-    } catch (error) {
-      console.error('Error deleting test:', error);
+  // 삭제하기
+  const mutationDelete = useMutation(delFreeBoard, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('FreeBoard');
     }
+  });
+
+  const handleDeleteBtn = (content) => {
+    const checkConfirm = window.confirm('삭제하시겠습니까?');
+    if (checkConfirm) return mutationDelete.mutate(content);
   };
 
-  const handleUpdate = async (test) => {
-    try {
-      setNewTest(test);
-      await fixFreeBoard(newTest.description);
-      fetchFreeBoard();
-    } catch (error) {
-      console.error('Error updating test:', error);
+  // 수정하기
+  const mutationUpdate = useMutation(fixFreeBoard, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('FreeBoard');
     }
+  });
+
+  const handleUpdateBtn = (id) => {
+    const updateText = window.prompt('수정할 내용을 입력하세요.');
+    const newData = {
+      id,
+      description: updateText
+    };
+    mutationUpdate.mutate(newData);
   };
 
-  useEffect(() => {
-    fetchFreeBoard();
-  }, []);
+  if (isLoading) return '로딩중입니다.';
+
+  if (isError) return 'ERROR';
 
   return (
     <div>
       <Title>자유게시판</Title>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={(e) => handleSubmitBtn(e)}>
         <CommentInput
           type="text"
-          value={newTest.description}
-          onChange={(e) => setNewTest({ description: e.target.value })}
+          value={content.description}
+          onChange={(e) => setContent({ description: e.target.value })}
           placeholder="Description"
         />
-        <WriteIcon src={writeIcon} onClick={handleSubmit} />
+        <WriteIcon src={writeIcon} onClick={(e) => handleSubmitBtn(e)} />
       </Form>
-      {FreeBoard.map((test) => (
-        <CommentListBox key={test.id}>
-          <p>{test.description}</p>
+
+      {data.map((content) => (
+        <CommentListBox key={content.id}>
+          <p>{content.description}</p>
           <div>
-            <PinkButton onClick={() => handleUpdate(test)}>수정</PinkButton>
-            <PinkButton onClick={() => handleDelete(test.id)}>삭제</PinkButton>
+            <PinkButton onClick={() => handleUpdateBtn(content.id)}>수정</PinkButton>
+            <PinkButton onClick={() => handleDeleteBtn(content.id)}>삭제</PinkButton>
           </div>
         </CommentListBox>
       ))}

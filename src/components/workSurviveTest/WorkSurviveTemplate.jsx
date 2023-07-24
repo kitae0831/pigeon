@@ -25,8 +25,6 @@ function WorkSurviveTemplate() {
     return (prev += cur);
   }, 0);
 
-  console.log('total', totalScore);
-
   const handleOkBtn = () => {
     setIsOpen(false);
   };
@@ -56,7 +54,6 @@ function WorkSurviveTemplate() {
 
   const makeResult = () => {
     const surveyResult = WorkSurviveResult.find((item) => item.score[0] <= totalScore);
-    console.log('survey', surveyResult);
 
     return (
       <ResultContainer>
@@ -92,7 +89,6 @@ function WorkSurviveTemplate() {
                     {item.answer}
                   </AnswerLabel>
                 </form>
-                {console.log(score)}
               </div>
             );
           })}
