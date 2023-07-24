@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import { GreenButton } from '../shared/Buttons';
 
 function Modal(props) {
-  const { name, handleFixButton, cancelButton, handleDelBtn, children } = props;
+  const { name, handleOkBtn, handleCancelBtn, handleDelBtn, children } = props;
 
   return (
     <>
@@ -11,8 +11,8 @@ function Modal(props) {
         <StModalContents>
           <h3>{children}</h3>
           <ButtonContainer>
-            <GreenButton onClick={name == 'delBtn' ? handleDelBtn : handleFixButton}>확인</GreenButton>
-            <GreenButton onClick={cancelButton}>취소</GreenButton>
+            <GreenButton onClick={name == 'delBtn' ? handleDelBtn : handleOkBtn}>확인</GreenButton>
+            <GreenButton onClick={handleCancelBtn}>취소</GreenButton>
           </ButtonContainer>
         </StModalContents>
       </StModalBox>
