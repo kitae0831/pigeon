@@ -84,7 +84,7 @@ const QuestionBox = styled.div`
   padding: 20px;
   border: 7px solid var(--color_green);
   border-radius: 20px;
-  width: 850px;
+  width: 940px;
 `;
 
 const Question = styled.h2`
