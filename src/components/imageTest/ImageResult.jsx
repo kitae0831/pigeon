@@ -1,112 +1,83 @@
-import React, { useState } from 'react';
-import { useQuery } from 'react-query';
-import { getImageTest, fixScore } from '../../api/imageTest';
-import $ from 'jquery';
+import React from 'react';
+import { getImageResult, getImageScore } from '../../api/imageTest';
 import { GreenButton } from '../../shared/Buttons';
-import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import { styled } from 'styled-components';
 import '../../color.css';
+import { imgMapper } from './ImageMapper';
+import { useNavigate } from 'react-router-dom';
 
-function ImageTest() {
-  const { isLoading, isError, data } = useQuery('imageTest', getImageTest);
-  const [questionNumber, setQuestionNumber] = useState(0);
-  const [totalScore, setTotalScore] = useState(0);
+function ImageResult() {
+  const { isLoading, isError, data } = useQuery('imageScore', getImageScore);
+  const { isLoading: isImageLoading, isError: isImageError, data: results } = useQuery('imageResults', getImageResult);
   const navigate = useNavigate();
 
-  const nextButtonClickHandler = async () => {
-    const checkedInputScore = $(`input[name=${questionNumber}]:checked`).val();
-    if (checkedInputScore === undefined) {
-      return alert('답변을 선택해주세요!');
-    }
-    if (questionNumber === 9) {
-      fixScore(totalScore + Number(checkedInputScore));
-      navigate('/image-result');
-    } else {
-      setQuestionNumber(questionNumber + 1);
-      setTotalScore(totalScore + Number(checkedInputScore));
-    }
-
-    $(`input[name=${questionNumber}]`).prop('checked', false);
-  };
-
-  if (isLoading) {
+  if (isLoading || isImageLoading) {
     return <div>로딩중입니다.</div>;
   }
-  if (isError) {
+  if (isError || isImageError) {
     return <div>오류입니다.</div>;
   }
+  const { score } = data;
+
+  const matchedResult = results?.find((r) => Number(r.minimum) <= score && Number(r.maximum) >= score);
 
   return (
-    <StContainer>
-      <ImgTestTitle>이미지 테스트 😎</ImgTestTitle>
-      <QuestionBox>
-        <Question>
-          {questionNumber + 1}.&nbsp;{data[questionNumber].question}
-        </Question>
-        <AnswerBox>
-          {data[questionNumber].answers.map((a) => {
-            return (
-              <div key={a.id}>
-                <Input type="radio" id={a.id} value={a.score} name={questionNumber} />
-                <Label htmlFor={a.id}>{a.answer}</Label>
-              </div>
-            );
-          })}
-        </AnswerBox>
-        <GreenButton onClick={nextButtonClickHandler} style={{ width: '200px' }}>
-          {questionNumber === 9 ? '결과 확인하기 !' : '다음'}
+    <ResultBox>
+      <div>
+        <h3>남들이 생각하는 당신은?</h3>
+        <ResultTitle>{matchedResult.title}</ResultTitle>
+      </div>
+      <ResultImg src={imgMapper[matchedResult.id]} />
+      <StContent>{matchedResult.content}</StContent>
+      <ButtonSet>
+        <GreenButton
+          onClick={() => {
+            navigate('/');
+          }}
+        >
+          홈으로
         </GreenButton>
-      </QuestionBox>
-    </StContainer>
+        <GreenButton
+          onClick={() => {
+            navigate('/image-test');
+          }}
+        >
+          다시하기{' '}
+        </GreenButton>
+      </ButtonSet>
+    </ResultBox>
   );
 }
 
-export default ImageTest;
-
-const StContainer = styled.div`
+export default ImageResult;
+const ResultBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  text-align: center;
+  white-space: pre-line;
+  margin: 90px;
 `;
-
-const ImgTestTitle = styled.h1`
-  color: var(--color_dark_green);
-  font-size: 40px;
-`;
-
-const QuestionBox = styled.div`
-  display: flex;
-  height: 550px;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 20px;
-  border: 7px solid var(--color_green);
-  border-radius: 20px;
-  width: 940px;
-`;
-
-const Question = styled.h2`
-  font-size: 30px;
-`;
-
-const AnswerBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  width: 500px;
-  height: 300px;
-  padding-left: 50px;
-  box-sizing: border-box;
-`;
-
-const Input = styled.input`
-  cursor: pointer;
-`;
-
-const Label = styled.label`
+const ResultTitle = styled.h2`
+  margin-bottom: 35px;
   font-weight: bold;
-  cursor: pointer;
+  font-size: 40px;
+  text-shadow: 1px 1px 2px var(--color_dark_green);
+  text-decoration: underline var(--color_green) 3px;
+`;
+const ResultImg = styled.img`
+  width: 200px;
+  margin-bottom: 30px;
+`;
+
+const StContent = styled.div`
+  font-weight: bold;
+  line-height: 2;
+  margin-bottom: 30px;
+`;
+const ButtonSet = styled.div`
+  height: 30px;
+  display: flex;
+  gap: 10px;
 `;
