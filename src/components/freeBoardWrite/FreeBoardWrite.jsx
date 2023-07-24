@@ -19,6 +19,7 @@ const FreeBoardWrite = () => {
   const mutationAdd = useMutation(addFreeBoard, {
     onSuccess: () => {
       queryClient.invalidateQueries('FreeBoard');
+      setContent({title: '', description: ''})
     }
   });
 
@@ -81,7 +82,7 @@ const FreeBoardWrite = () => {
             <PinkButton onClick={() => handleDeleteBtn(content.id)}>삭제</PinkButton>
           </div>
         </CommentListBox>
-      ))}
+      )).reverse()}
     </div>
   );
 };
