@@ -1,70 +1,96 @@
-# Getting Started with Create React App
+## 심리테스트 사이트: 오구오구
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+리액트를 이용해 설문조사 페이지 구현 (json-server, react-router-dom 사용)
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 기술스택
 
-### `yarn start`
+<div align=left>
+  <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
+  <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> 
+  <img src="https://img.shields.io/badge/reactquery-9B9B9B?style=for-the-badge&logo=reactquery&logoColor=white">
+  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+  <img src="https://img.shields.io/badge/vercel-A9A9A9?style=for-the-badge&logo=vercel&logoColor=white">
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 팀구성
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| 박지환 | 박기태 | 김채현 | 황태규 | 임설빈 |
 
-### `yarn test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 깃 플로우 전략
 
-### `yarn build`
+- main
+- develop
+- feature
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 커밋 컨벤션
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- feat : 새로운 기능 추가
+- fix : 버그 수정
+- docs : 문서 변경
+- style : styled-components 수정, layout 수정 등 스타일 관련 변경
+- refactor : 코드 리팩토링 (변수명 변경 등)
+- chore : 설정 변경 등
+  기타 변경사항
 
-### `yarn eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 코드 컨벤션
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 폴더, 파일명
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+컴포넌트 파일명은 파스칼 케이스(PascalCase)를 사용한다.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```javascript
+MainComponent.jsx;
+Route.jsx;
+```
 
-## Learn More
+컴포넌트를 제외한 폴더, 파일명은 카멜 케이스(camelCase)를 사용한다.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```javascript
+components;
+modules;
+configStore.js;
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 함수
 
-### Code Splitting
+함수명은 카멜 케이스(camelCase)를 원칙으로 한다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```javascript
+function nameOfFunction() {
+  // ...some logic
+}
+```
 
-### Analyzing the Bundle Size
+### 변수명
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+상수는 모두 대문자로 쓰며 띄어쓰기는 \_로 처리하며, 객체타입의 경우 카멜 케이스를 적용한다.
 
-### Making a Progressive Web App
+```javascript
+const SOME_VALUE = 1;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+const people = {
+  name: '김자바',
+  age: '26'
+};
+```
 
-### Advanced Configuration
+### 클래스명
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+클래스명은 케밥 케이스(kebab-case)를 원칙으로 한다.
 
-### Deployment
+```html
+<h1 class="main-title">심리테스트</h1>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
